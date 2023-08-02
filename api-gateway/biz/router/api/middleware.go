@@ -80,3 +80,138 @@ func _register0Mw() []app.HandlerFunc {
 	// your code...
 	return nil
 }
+
+func _commentMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _commentactionMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _getcommentMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _favoriteMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _action0Mw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _favoriteactionMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _list0Mw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _getfavoritelistMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _messageMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _action1Mw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _messageactionMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _chatMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _getmessagechatMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _action2Mw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _list1Mw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _relationMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _action3Mw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _relationactionMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _followMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _list2Mw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _getrelationfollowlistMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _followerMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _list3Mw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _getrelationfollowerlistMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _friendMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _list4Mw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _getrelationfriendlistMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
