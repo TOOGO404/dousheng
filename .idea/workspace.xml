@@ -4,8 +4,18 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f55cc524-fd67-418e-a194-fb1ec48e5bf3" name="Changes" comment="NavyZ:create all api-gateway interface">
+    <list default="true" id="f55cc524-fd67-418e-a194-fb1ec48e5bf3" name="Changes" comment="NavyZ:change some definations">
+      <change afterPath="$PROJECT_DIR$/cmd/gateway/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmd/migrateDB/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datasource/model/migrateDatabase.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/router_gen.go" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/router_gen.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/script/bootstrap.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasource/database/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/datasource/database/mysql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasource/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.work" beforeDir="false" afterPath="$PROJECT_DIR$/go.work" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +120,7 @@
       <recent name="$PROJECT_DIR$/api-gateway/idl" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build api-gateway">
+  <component name="RunManager">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="dousheng" />
       <working_directory value="$PROJECT_DIR$" />
@@ -120,22 +130,13 @@
       <filePath value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="go build api-gateway" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
+    <configuration name="go build cmd/gateway" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="dousheng" />
-      <working_directory value="$PROJECT_DIR$" />
-      <go_parameters value="-i" />
-      <kind value="DIRECTORY" />
-      <directory value="$PROJECT_DIR$/api-gateway" />
-      <filePath value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go build datasource" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="dousheng" />
-      <working_directory value="$PROJECT_DIR$/datasource" />
+      <working_directory value="$PROJECT_DIR$/cmd" />
       <kind value="PACKAGE" />
-      <package value="datasource" />
+      <package value="cmd/gateway" />
       <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/datasource/main.go" />
+      <filePath value="$PROJECT_DIR$/cmd/gateway/main.go" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
@@ -150,7 +151,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build datasource" />
+        <item itemvalue="Go Build.go build cmd/gateway" />
       </list>
     </recent_temporary>
   </component>
@@ -186,7 +187,8 @@
     <MESSAGE value="NavyZ:add /douyin/user/register api to thrift" />
     <MESSAGE value="NavyZ:successfully create basicOperations api" />
     <MESSAGE value="NavyZ:create all api-gateway interface" />
-    <option name="LAST_COMMIT_MESSAGE" value="NavyZ:create all api-gateway interface" />
+    <MESSAGE value="NavyZ:change some definations" />
+    <option name="LAST_COMMIT_MESSAGE" value="NavyZ:change some definations" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

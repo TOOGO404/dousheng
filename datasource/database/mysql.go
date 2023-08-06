@@ -1,6 +1,7 @@
 package database
 
 import (
+	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -14,4 +15,20 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
+}
+
+type DSNConf struct {
+	User      string
+	Pwd       string
+	HostNPort string
+	DbName    string
+}
+
+func (conf *DSNConf) GetDSN() string {
+	return fmt.Sprintf(
+		"%s:%s@tcp(%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+		conf.User,
+		conf.Pwd,
+		conf.HostNPort,
+		conf.DbName)
 }
