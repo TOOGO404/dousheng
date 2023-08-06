@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f55cc524-fd67-418e-a194-fb1ec48e5bf3" name="Changes" comment="NavyZ:change some definations">
-      <change afterPath="$PROJECT_DIR$/cmd/gateway/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmd/migrateDB/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/datasource/model/migrateDatabase.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/build.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/main.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/router_gen.go" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/router_gen.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/script/bootstrap.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/datasource/database/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/datasource/database/mysql.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datasource/main.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.work" beforeDir="false" afterPath="$PROJECT_DIR$/go.work" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/migrateDB/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/migrateDB/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

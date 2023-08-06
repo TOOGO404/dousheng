@@ -1,7 +1,7 @@
 package main
 
-import "datasource/database"
+import "datasource/model"
 
 func main() {
-	database.MigrateDB()
+	model.MigrateDB()
 }
