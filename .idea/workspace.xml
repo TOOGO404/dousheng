@@ -5,7 +5,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f55cc524-fd67-418e-a194-fb1ec48e5bf3" name="Changes" comment="NavyZ:change some definations">
+      <change afterPath="$PROJECT_DIR$/api-gateway/mw/jwt.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-gateway/rpc/userClient.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmd/test_dir/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datasource/database/model/comment.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datasource/database/model/like.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datasource/database/model/message.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datasource/database/model/subscript.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datasource/database/model/user.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datasource/database/model/video.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/idl/user.thrift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/dal/dao/dao.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/dal/database.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/snowFlake.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/biz/handler/api/comment_service.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/biz/handler/api/favorite_service.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/biz/handler/api/feed_service.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/biz/handler/api/meassge_service.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/biz/handler/api/publish_service.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/biz/handler/api/relation_service.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/biz/handler/api/user_service.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/biz/model/api/ops.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/biz/router/api/middleware.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/biz/router/api/ops.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/biz/router/register.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/idl/ops.thrift" beforeDir="false" afterPath="$PROJECT_DIR$/idl/api.thrift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/gateway/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/gateway/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/migrateDB/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/migrateDB/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasource/database/mysql.go" beforeDir="false" afterPath="$PROJECT_DIR$/datasource/database/mysql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasource/model/migrateDatabase.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.work" beforeDir="false" afterPath="$PROJECT_DIR$/go.work" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +130,7 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/navy/Desktop/dousheng&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/navy/demo&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
@@ -106,11 +139,14 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cmd/user-service" />
+      <recent name="$PROJECT_DIR$/idl" />
+      <recent name="$PROJECT_DIR$/datasource/database" />
       <recent name="$PROJECT_DIR$/api-gateway/biz" />
       <recent name="$PROJECT_DIR$/api-gateway/idl" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Go Build.gateway">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="dousheng" />
       <working_directory value="$PROJECT_DIR$" />
@@ -120,13 +156,22 @@
       <filePath value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="go build cmd/gateway" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="gateway" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
       <module name="dousheng" />
       <working_directory value="$PROJECT_DIR$/cmd" />
       <kind value="PACKAGE" />
       <package value="cmd/gateway" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$/cmd/gateway/main.go" />
+      <method v="2" />
+    </configuration>
+    <configuration name="user-service" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
+      <module name="dousheng" />
+      <working_directory value="$PROJECT_DIR$/cmd" />
+      <kind value="PACKAGE" />
+      <package value="cmd/user-service" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/cmd/user-service/main.go" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
@@ -139,9 +184,14 @@
       <framework value="gotest" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Go Build.user-service" />
+      <item itemvalue="Go Build.gateway" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build cmd/gateway" />
+        <item itemvalue="Go Build.gateway" />
+        <item itemvalue="Go Build.user-service" />
       </list>
     </recent_temporary>
   </component>

@@ -4,4 +4,8 @@ use (
 	./api-gateway
 	./cmd
 	./datasource
+	./feed-service
+	./fileStorage
+	./user-service
+	./utils
 )

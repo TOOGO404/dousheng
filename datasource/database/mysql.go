@@ -1,21 +1,11 @@
 package database
 
 import (
+	"datasource/database/model"
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
-
-var MYSQL_DB *gorm.DB
-
-func init() {
-	dsn := "root:000000@tcp(127.0.0.1:3306)/dousheng?charset=utf8mb4&parseTime=True&loc=Local"
-	var err error
-	MYSQL_DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	if err != nil {
-		panic(err)
-	}
-}
 
 type DSNConf struct {
 	User      string
@@ -31,4 +21,29 @@ func (conf *DSNConf) GetDSN() string {
 		conf.Pwd,
 		conf.HostNPort,
 		conf.DbName)
+}
+
+func ReadConfYamlFile(path *string) *DSNConf {
+	conf := new(DSNConf)
+	if path == nil {
+		conf.User = "root"
+		conf.Pwd = "000000"
+		conf.DbName = "dousheng"
+		conf.HostNPort = "127.0.0.1:3306"
+	} else {
+		panic("not impl")
+	}
+	return conf
+}
+
+func (conf *DSNConf) MigrateDB() error {
+	dsn := conf.GetDSN()
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	if err != nil {
+		fmt.Errorf("数据库连接失败")
+	}
+	return db.AutoMigrate(
+		&model.User{},
+		&model.Video{},
+	)
 }

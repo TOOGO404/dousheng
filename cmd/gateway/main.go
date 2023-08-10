@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	h := server.Default()
+	h := server.New(server.WithHostPorts(":8080"))
 	//添加 accesslog打印访问日志功能
 	h.Use(accesslog.New(
 		accesslog.WithFormat(
