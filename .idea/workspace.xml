@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f55cc524-fd67-418e-a194-fb1ec48e5bf3" name="Changes" comment="NavyZ:add">
-      <change afterPath="$PROJECT_DIR$/api-gateway/rpc/feedClient.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmd/fileServer/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/feed-service/dal/dao/dao.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/feed-service/dal/mysql.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fileStorage/localStorage/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/idl/feed.thrift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/idl/api.thrift" beforeDir="false" afterPath="$PROJECT_DIR$/idl/api.thrift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +97,7 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/navy/Desktop/dousheng/tmp&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/navy&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
@@ -124,7 +116,7 @@
       <recent name="$PROJECT_DIR$/idl" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build cmd/fileServer">
+  <component name="RunManager" selected="Go Build.gateway">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="dousheng" />
       <working_directory value="$PROJECT_DIR$" />
@@ -188,8 +180,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build cmd/fileServer" />
         <item itemvalue="Go Build.gateway" />
+        <item itemvalue="Go Build.go build cmd/fileServer" />
         <item itemvalue="Go Build.feed-service" />
         <item itemvalue="Go Build.user-service" />
       </list>
