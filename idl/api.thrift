@@ -141,7 +141,7 @@ struct PublishListResponse {
 }
 
 service PublishService {
-    PublishActionResponse PublishAction(1: PublishActionRequest req) (api.post="/douyin/publish/dao/")
+    PublishActionResponse PublishAction(1: PublishActionRequest req) (api.post="/douyin/publish/action/")
     PublishListResponse GetPublishList(1: PublishListRequest req) (api.get="/douyin/publish/list/")
 }
 
@@ -168,7 +168,7 @@ struct FavoriteListResponse {
 }
 
 service FavoriteService {
-	FavoriteActionResponse FavoriteAction(1: FavoriteActionRequest req) (api.post="/douyin/favorite/dao/")
+	FavoriteActionResponse FavoriteAction(1: FavoriteActionRequest req) (api.post="/douyin/favorite/action/")
 	FavoriteListResponse GetFavoriteList(1: FavoriteListRequest req) (api.get="/douyin/favorite/list/")
 }
 
@@ -195,7 +195,7 @@ struct CommentListResponse {
 }
 
 service CommentService {
-    CommentActionResponse CommentAction(1: CommentActionRequest req) (api.post="/douyin/comment/dao/")
+    CommentActionResponse CommentAction(1: CommentActionRequest req) (api.post="/douyin/comment/action/")
     CommentListResponse GetComment(1: CommentListRequest req) (api.get="/douyin/comment/list/")
 }
 
@@ -245,7 +245,7 @@ struct RelationFriendListResponse {
 }
 
 service RelationService {
-    RelationActionResponse RelationAction(1: RelationActionRequest req) (api.post="/douyin/relation/dao/")
+    RelationActionResponse RelationAction(1: RelationActionRequest req) (api.post="/douyin/relation/action/")
     RelationFollowListResponse GetRelationFollowList(1: RelationFollowListRequest req) (api.get="/douyin/relation/follow/list/")
     RelationFollowerListResponse GetRelationFollowerList(1: RelationFollowerListRequest req) (api.get="/douyin/relation/follower/list/")
 	RelationFriendListResponse GetRelationFriendList(1:RelationFriendListRequest req) (api.get="/douyin/relation/friend/list/")
@@ -275,6 +275,6 @@ struct MessageChatResponse {
 }
 
 service MeassgeService {
-	MessageActionResponse MessageAction(1: MessageActionRequest req) (api.post="/douyin/message/dao/")
+	MessageActionResponse MessageAction(1: MessageActionRequest req) (api.post="/douyin/message/action/")
 	MessageChatResponse GetMessageChat(1: MessageChatRequest req) (api.get="/douyin/message/chat/")
 }
