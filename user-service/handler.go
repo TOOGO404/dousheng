@@ -29,8 +29,6 @@ func (s *UserRpcServiceImpl) UserRegister(_ context.Context, req *user.RegisterR
 	}
 	resp := new(user.RegisterResp)
 	resp.Uid = _user.Id
-	resp.StatusCode = 0
-	resp.StatusMsg = "注册成功"
 	return resp, nil
 }
 
@@ -42,9 +40,7 @@ func (s *UserRpcServiceImpl) UserLogin(_ context.Context, req *user.LoginReq) (*
 		Pwd:   req.Pwd,
 	})
 	resp := new(user.LoginResp)
-	resp.StatusCode = 0
 	resp.Uid = uid
-	resp.StatusMsg = ""
 	return resp, nil
 
 }
@@ -54,8 +50,6 @@ func (s *UserRpcServiceImpl) GetUserInfo(ctx context.Context, req *user.UserInfo
 	// TODO: Your code here...
 	info := dao.GetUserInfo(req.ReqUserId)
 	return &user.UserInfoResp{
-		StatusCode: 0,
-		StatusMsg:  "OK",
 		UserInfo: &user.UserInfo{
 			Id:              info.Id,
 			Name:            info.Name,

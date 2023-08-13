@@ -1,9 +1,7 @@
 namespace go feed
 
-struct FeedReq {
-    1: i64 latest_time
-}
 
+//feed rpc 请求和回复，
 struct Video {
     1: i64 id
     2: i64 AuthorID
@@ -12,6 +10,10 @@ struct Video {
     5: string cover_url
 }
 
+
+struct FeedReq {
+    1: i64 latest_time
+}
 struct FeedResp {
     1: list<Video> video_list
 }

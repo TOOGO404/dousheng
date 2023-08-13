@@ -6,6 +6,7 @@ use (
 	./datasource
 	./feed-service
 	./fileStorage
+	./publish-service
 	./user-service
 	./utils
 )

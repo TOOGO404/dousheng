@@ -59,8 +59,6 @@ func Register(ctx context.Context, c *app.RequestContext) {
 	} else {
 		resp := new(api.RegisterResponse)
 		resp.Token = tokenStr
-		resp.StatusCode = rpcResp.StatusCode
-		resp.StatusMsg = &rpcResp.StatusMsg
 		resp.UserID = rpcResp.Uid
 		c.JSON(consts.StatusOK, resp)
 	}

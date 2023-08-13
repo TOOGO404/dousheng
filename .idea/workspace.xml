@@ -5,7 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f55cc524-fd67-418e-a194-fb1ec48e5bf3" name="Changes" comment="NavyZ:add">
+      <change afterPath="$PROJECT_DIR$/api-gateway/rpc/publishClient.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/idl/publish.thrift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/biz/handler/api/user_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/biz/handler/api/user_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/test_dir/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.work" beforeDir="false" afterPath="$PROJECT_DIR$/go.work" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/idl/feed.thrift" beforeDir="false" afterPath="$PROJECT_DIR$/idl/feed.thrift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/idl/user.thrift" beforeDir="false" afterPath="$PROJECT_DIR$/idl/user.thrift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/kitex_gen/user/k-user.go" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/kitex_gen/user/k-user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/kitex_gen/user/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/kitex_gen/user/user.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,14 +119,14 @@
       <recent name="$PROJECT_DIR$/tmp" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cmd/publish-service" />
       <recent name="$PROJECT_DIR$/cmd/feed-service" />
       <recent name="$PROJECT_DIR$/tmp/video" />
       <recent name="$PROJECT_DIR$/tmp/cover" />
       <recent name="$PROJECT_DIR$/cmd/user-service" />
-      <recent name="$PROJECT_DIR$/idl" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.gateway">
+  <component name="RunManager" selected="Go Build.publish-service">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="dousheng" />
       <working_directory value="$PROJECT_DIR$" />
@@ -144,13 +154,21 @@
       <filePath value="$PROJECT_DIR$/cmd/gateway/main.go" />
       <method v="2" />
     </configuration>
-    <configuration name="go build cmd/fileServer" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="dousheng" />
+      <working_directory value="$PROJECT_DIR$/cmd" />
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/cmd/user-service/main.go" />
+      <method v="2" />
+    </configuration>
+    <configuration name="publish-service" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
       <module name="dousheng" />
       <working_directory value="$PROJECT_DIR$/cmd" />
       <kind value="PACKAGE" />
-      <package value="cmd/fileServer" />
+      <package value="cmd/publish-service" />
       <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/cmd/fileServer/main.go" />
+      <filePath value="$PROJECT_DIR$/cmd/publish-service/main.go" />
       <method v="2" />
     </configuration>
     <configuration name="user-service" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
@@ -173,17 +191,19 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Go Build.go build main.go" />
+      <item itemvalue="Go Build.publish-service" />
       <item itemvalue="Go Build.feed-service" />
-      <item itemvalue="Go Build.go build cmd/fileServer" />
       <item itemvalue="Go Build.user-service" />
       <item itemvalue="Go Build.gateway" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.publish-service" />
+        <item itemvalue="Go Build.go build main.go" />
         <item itemvalue="Go Build.gateway" />
-        <item itemvalue="Go Build.go build cmd/fileServer" />
-        <item itemvalue="Go Build.feed-service" />
         <item itemvalue="Go Build.user-service" />
+        <item itemvalue="Go Build.feed-service" />
       </list>
     </recent_temporary>
   </component>
@@ -231,7 +251,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/api-gateway/biz/handler/api/user_service.go</url>
-          <line>98</line>
+          <line>96</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
