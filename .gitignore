@@ -1,0 +1,2 @@
+/cmd/fileServer/
+/datasource/database/mysql.go
