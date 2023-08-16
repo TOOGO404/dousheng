@@ -8,8 +8,10 @@ import (
 	"api-gateway/rpc"
 	"context"
 	"github.com/cloudwego/hertz/pkg/app"
+	"github.com/cloudwego/hertz/pkg/common/utils"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
 	"log"
+	"net/http"
 	"user-service/kitex_gen/user"
 )
 
@@ -103,7 +105,15 @@ func GetUserInfo(ctx context.Context, c *app.RequestContext) {
 		c.Abort()
 		return
 	} else {
-		uid := c.GetInt64("uid")
+		c.Get()
+		_uid, exist := c.Keys["uid"]
+		if !exist {
+			c.JSON(http.StatusOK, utils.H{
+				"status_code": 1,
+				"status_msg":  "please login at first",
+			})
+		}
+		uid := _uid.(int64)
 		rpcResp, _ := rpc.UserRPCClient.GetUserInfo(ctx, &user.UserInfoReq{
 			SendReqUserId: uid,
 			ReqUserId:     req.UserID,

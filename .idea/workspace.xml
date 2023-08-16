@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f55cc524-fd67-418e-a194-fb1ec48e5bf3" name="Changes" comment="NavyZ:添加Publish服务">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="f55cc524-fd67-418e-a194-fb1ec48e5bf3" name="Changes" comment="NavyZ:添加gitignore">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/fileServer/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/fileServer/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/biz/handler/api/user_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/biz/handler/api/user_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/mw/jwt.go" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/mw/jwt.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,20 +234,10 @@
     <MESSAGE value="NavyZ:change some definations" />
     <MESSAGE value="NavyZ:add" />
     <MESSAGE value="NavyZ:添加Publish服务" />
-    <option name="LAST_COMMIT_MESSAGE" value="NavyZ:添加Publish服务" />
+    <MESSAGE value="NavyZ:添加gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="NavyZ:添加gitignore" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/api-gateway/biz/handler/api/user_service.go</url>
-          <line>96</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

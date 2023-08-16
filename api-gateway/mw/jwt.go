@@ -35,8 +35,8 @@ func JWTCheck(ctx context.Context, req *app.RequestContext) {
 		req.Next(ctx)
 	} else {
 		pt, err := ParseToken(token.GetToken())
-		if err != nil && pt.Valid {
-			claims := pt.Claims.(MyClaims)
+		if err == nil && pt.Valid {
+			claims := pt.Claims.(*MyClaims)
 			req.Set("uid", claims.UId)
 		}
 	}
@@ -47,7 +47,7 @@ func SignedToken(uid int64) (string, error) {
 	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, MyClaims{
 		StandardClaims: jwt.StandardClaims{
 			NotBefore: time.Now().Unix(),
-			ExpiresAt: time.Now().Unix() + 60*60,
+			ExpiresAt: time.Now().Unix() + 30*24*60*60,
 			Issuer:    "api-gateway",
 		},
 		UId: uid,
