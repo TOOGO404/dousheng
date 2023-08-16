@@ -1,16 +1,17 @@
 package main
 
 import (
-	"github.com/cloudwego/kitex/pkg/rpcinfo"
-	"github.com/cloudwego/kitex/server"
-	etcd "github.com/kitex-contrib/registry-etcd"
 	"log"
 	"net"
-	"publish-service"
+	publish_service "publish-service"
 	publish "publish-service/kitex_gen/publish/publishrpcservice"
 	"sync"
 	"time"
 	"utils"
+
+	"github.com/cloudwego/kitex/pkg/rpcinfo"
+	"github.com/cloudwego/kitex/server"
+	etcd "github.com/kitex-contrib/registry-etcd"
 )
 
 func main() {

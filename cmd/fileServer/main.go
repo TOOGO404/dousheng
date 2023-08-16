@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	err := localStorage.RunHttpFileServer("/home/navy/Desktop/tmp")
+	err := localStorage.RunHttpFileServer("/home/lixiaohui/temp")
 	if err != nil {
 		panic(err)
 	}

@@ -3,27 +3,61 @@
 package api
 
 import (
-	"context"
-
 	api "api-gateway/biz/model/api"
+	"api-gateway/rpc"
+	"context"
+	"publish-service/kitex_gen/publish"
+
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
+	"mime/multipart"
+	"io/ioutil"
 )
 
 // PublishAction .
 // @router /douyin/publish/action/ [POST]
 func PublishAction(ctx context.Context, c *app.RequestContext) {
-	var err error
-	var req api.PublishActionRequest
-	err = c.BindAndValidate(&req)
-	if err != nil {
-		c.String(consts.StatusBadRequest, err.Error())
-		return
-	}
+		// var err error
+		// var req api.PublishActionRequest
+		// err = c.BindAndValidate(&req)
+		// if err != nil {
+		// 	c.String(consts.StatusBadRequest, err.Error())
+		// 	return
+		// }
+		data, err := c.FormFile("video")
+		if err != nil {
+			c.String(consts.StatusBadRequest,"没有上传视频")
+		}		
 
-	resp := new(api.PublishActionResponse)
+		fileHandle, err1 := data.Open() //打开上传文件
+		if err1 != nil {
+			c.String(consts.StatusBadRequest,"打开文件失败")
+		}
 
-	c.JSON(consts.StatusOK, resp)
+		// 闭包处理错误
+		defer func(fileHandle multipart.File) {
+			err := fileHandle.Close()
+			if err != nil {
+				c.String(consts.StatusBadRequest,"关闭文件错误")
+			}
+		}(fileHandle)
+
+		// 将视频文件转成二进制
+		fileByte, err2 := ioutil.ReadAll(fileHandle)
+		if err2 != nil {
+			c.String(consts.StatusBadRequest,"读取文件错误")
+		}
+		
+		rpcResp, _ := rpc.PublishRPCClient.PublishAction(ctx,&publish.VideoData{
+				Data: fileByte,
+				Title: data.Filename,
+			})
+		// 将视频保存到本地 /home/lixiaohui/temp/video (测试：视频暂时在此处保存)
+		err3 := c.SaveUploadedFile(data, "/home/lixiaohui/temp/video/" + data.Filename)
+		if err3 != nil {
+			c.String(consts.StatusBadRequest,"视频保存失败")
+		}
+		c.JSON(consts.StatusOK, rpcResp.VideoId)
 }
 
 // GetPublishList .
