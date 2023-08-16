@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f55cc524-fd67-418e-a194-fb1ec48e5bf3" name="Changes" comment="NavyZ:add">
-      <change afterPath="$PROJECT_DIR$/api-gateway/rpc/publishClient.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/idl/publish.thrift" afterDir="false" />
+    <list default="true" id="f55cc524-fd67-418e-a194-fb1ec48e5bf3" name="Changes" comment="NavyZ:添加Publish服务">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/biz/handler/api/user_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/biz/handler/api/user_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/test_dir/main.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.work" beforeDir="false" afterPath="$PROJECT_DIR$/go.work" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/idl/feed.thrift" beforeDir="false" afterPath="$PROJECT_DIR$/idl/feed.thrift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/idl/user.thrift" beforeDir="false" afterPath="$PROJECT_DIR$/idl/user.thrift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/kitex_gen/user/k-user.go" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/kitex_gen/user/k-user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/kitex_gen/user/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/kitex_gen/user/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/fileServer/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/fileServer/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -241,7 +233,8 @@
     <MESSAGE value="NavyZ:create all api-gateway interface" />
     <MESSAGE value="NavyZ:change some definations" />
     <MESSAGE value="NavyZ:add" />
-    <option name="LAST_COMMIT_MESSAGE" value="NavyZ:add" />
+    <MESSAGE value="NavyZ:添加Publish服务" />
+    <option name="LAST_COMMIT_MESSAGE" value="NavyZ:添加Publish服务" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
