@@ -45,5 +45,6 @@ func (conf *DSNConf) MigrateDB() error {
 	return db.AutoMigrate(
 		&model.User{},
 		&model.Video{},
+		&model.Comment{},
 	)
 }
