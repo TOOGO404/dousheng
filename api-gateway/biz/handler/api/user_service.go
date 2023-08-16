@@ -105,7 +105,6 @@ func GetUserInfo(ctx context.Context, c *app.RequestContext) {
 		c.Abort()
 		return
 	} else {
-		c.Get()
 		_uid, exist := c.Keys["uid"]
 		if !exist {
 			c.JSON(http.StatusOK, utils.H{
