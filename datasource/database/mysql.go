@@ -27,7 +27,7 @@ func ReadConfYamlFile(path *string) *DSNConf {
 	conf := new(DSNConf)
 	if path == nil {
 		conf.User = "root"
-		conf.Pwd = "li970511"
+		conf.Pwd = "000000"
 		conf.DbName = "dousheng"
 		conf.HostNPort = "127.0.0.1:3306"
 	} else {
@@ -40,10 +40,11 @@ func (conf *DSNConf) MigrateDB() error {
 	dsn := conf.GetDSN()
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
-		fmt.Errorf("数据库连接失败")
+		_ = fmt.Errorf("数据库连接失败")
 	}
 	return db.AutoMigrate(
 		&model.User{},
 		&model.Video{},
+		&model.Comment{},
 	)
 }

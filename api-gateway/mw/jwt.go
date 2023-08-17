@@ -47,7 +47,7 @@ func SignedToken(uid int64) (string, error) {
 	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, MyClaims{
 		StandardClaims: jwt.StandardClaims{
 			NotBefore: time.Now().Unix(),
-			ExpiresAt: time.Now().Unix() + 30*24*60*60,
+			ExpiresAt: time.Now().Unix() + 3600*60*60,
 			Issuer:    "api-gateway",
 		},
 		UId: uid,
