@@ -7,6 +7,8 @@ replace github.com/apache/thrift => github.com/apache/thrift v0.13.0
 require (
 	github.com/apache/thrift v0.13.0
 	github.com/cloudwego/kitex v0.6.2
+	gorm.io/driver/mysql v1.5.1
+	gorm.io/gorm v1.25.3
 )
 
 require (
@@ -20,9 +22,12 @@ require (
 	github.com/cloudwego/frugal v0.1.6 // indirect
 	github.com/cloudwego/netpoll v0.4.0 // indirect
 	github.com/cloudwego/thriftgo v0.2.11 // indirect
+	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/pprof v0.0.0-20220608213341-c488b8fa1db3 // indirect
 	github.com/jhump/protoreflect v1.8.2 // indirect
+	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.4 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421 // indirect

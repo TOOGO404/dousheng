@@ -27,7 +27,7 @@ func ReadConfYamlFile(path *string) *DSNConf {
 	conf := new(DSNConf)
 	if path == nil {
 		conf.User = "root"
-		conf.Pwd = "000000"
+		conf.Pwd = "li970511"
 		conf.DbName = "dousheng"
 		conf.HostNPort = "127.0.0.1:3306"
 	} else {

@@ -6,7 +6,7 @@ require (
 	github.com/apache/thrift v0.18.1
 	github.com/cloudwego/hertz v0.6.6
 	github.com/cloudwego/kitex v0.6.2
-	github.com/hertz-contrib/jwt v1.0.2
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/kitex-contrib/registry-etcd v0.1.0
 )
 
@@ -26,7 +26,6 @@ require (
 	github.com/coreos/go-systemd/v22 v22.3.2 // indirect
 	github.com/fsnotify/fsnotify v1.5.4 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
-	github.com/golang-jwt/jwt/v4 v4.4.1 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/pprof v0.0.0-20220608213341-c488b8fa1db3 // indirect
 	github.com/henrylee2cn/ameda v1.4.10 // indirect
