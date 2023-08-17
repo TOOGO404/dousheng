@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f55cc524-fd67-418e-a194-fb1ec48e5bf3" name="Changes" comment="NavyZ:添加gitignore">
+    <list default="true" id="f55cc524-fd67-418e-a194-fb1ec48e5bf3" name="Changes" comment="NavyZ: 修复jwt逻辑错误和重新设置jwt时间失效时间为30天">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/biz/handler/api/user_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/biz/handler/api/user_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/mw/jwt.go" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/mw/jwt.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +117,7 @@
       <recent name="$PROJECT_DIR$/cmd/user-service" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.publish-service">
+  <component name="RunManager" selected="Go Build.user-service">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="dousheng" />
       <working_directory value="$PROJECT_DIR$" />
@@ -144,14 +143,6 @@
       <package value="cmd/gateway" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$/cmd/gateway/main.go" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="dousheng" />
-      <working_directory value="$PROJECT_DIR$/cmd" />
-      <kind value="FILE" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/cmd/user-service/main.go" />
       <method v="2" />
     </configuration>
     <configuration name="publish-service" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
@@ -183,7 +174,6 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Go Build.go build main.go" />
       <item itemvalue="Go Build.publish-service" />
       <item itemvalue="Go Build.feed-service" />
       <item itemvalue="Go Build.user-service" />
@@ -191,10 +181,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.publish-service" />
-        <item itemvalue="Go Build.go build main.go" />
-        <item itemvalue="Go Build.gateway" />
         <item itemvalue="Go Build.user-service" />
+        <item itemvalue="Go Build.gateway" />
+        <item itemvalue="Go Build.publish-service" />
         <item itemvalue="Go Build.feed-service" />
       </list>
     </recent_temporary>
@@ -235,7 +224,8 @@
     <MESSAGE value="NavyZ:add" />
     <MESSAGE value="NavyZ:添加Publish服务" />
     <MESSAGE value="NavyZ:添加gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="NavyZ:添加gitignore" />
+    <MESSAGE value="NavyZ: 修复jwt逻辑错误和重新设置jwt时间失效时间为30天" />
+    <option name="LAST_COMMIT_MESSAGE" value="NavyZ: 修复jwt逻辑错误和重新设置jwt时间失效时间为30天" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
