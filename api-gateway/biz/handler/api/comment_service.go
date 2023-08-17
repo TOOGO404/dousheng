@@ -35,7 +35,9 @@ func CommentAction(ctx context.Context, c *app.RequestContext) {
 		resp.StatusCode = http.StatusBadRequest
 		c.JSON(http.StatusBadRequest, resp)
 		c.Abort()
+		return
 	}
+	log.Println(Uid, req)
 	act := req.GetActionType()
 	switch act {
 	case 1:
@@ -46,7 +48,7 @@ func CommentAction(ctx context.Context, c *app.RequestContext) {
 			CommentText: req.CommentText,
 		})
 		if err != nil {
-
+			log.Println("Here")
 		}
 		resp.StatusCode = 0
 		resp.StatusMsg = nil

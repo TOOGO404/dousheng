@@ -7,6 +7,7 @@ import (
 	"datasource/database/model"
 	"log"
 	"net/http"
+	"time"
 	usr "user-service/dal/dao"
 )
 
@@ -25,7 +26,7 @@ func (s *CommentRpcServiceImpl) CommentGet(ctx context.Context, req *comment.Com
 
 		tmp.Id = cm.ID
 		tmp.Content = cm.Content
-		tmp.CreateDate = cm.CreateDate
+		tmp.CreateDate = cm.CreateDate.String()
 		dbusr := usr.GetUserInfo(cm.Who)
 		_usr := new(comment.User)
 		_usr.Id = dbusr.Id
@@ -46,6 +47,7 @@ func (s *CommentRpcServiceImpl) CommentGet(ctx context.Context, req *comment.Com
 func (s *CommentRpcServiceImpl) CommentAction(ctx context.Context, req *comment.CommentActionRequest) (r *comment.CommentActionResponse, err error) {
 	act := req.ActionType
 	resp := new(comment.CommentActionResponse)
+	log.Println(req)
 	switch act {
 	case 1:
 		com := new(model.Comment)
@@ -53,8 +55,10 @@ func (s *CommentRpcServiceImpl) CommentAction(ctx context.Context, req *comment.
 		com.VideoID = req.VideoId
 		com.Who = req.Uid
 		com.User = usr.GetUserInfo(com.Who)
+		com.CreateDate = time.Now()
 		err := dao.AddComment(com)
 		if err != nil {
+			log.Println("Here")
 			return nil, err
 		}
 
@@ -64,7 +68,7 @@ func (s *CommentRpcServiceImpl) CommentAction(ctx context.Context, req *comment.
 		resp.Comment = &comment.Comment{
 			Id:         com.ID,
 			Content:    com.Content,
-			CreateDate: com.CreateDate,
+			CreateDate: com.CreateDate.String(),
 			User: &comment.User{
 				Id:              com.User.Id,
 				Name:            com.User.Name,
@@ -95,7 +99,7 @@ func (s *CommentRpcServiceImpl) CommentAction(ctx context.Context, req *comment.
 		resp.Comment = &comment.Comment{
 			Id:         com.ID,
 			Content:    com.Content,
-			CreateDate: com.CreateDate,
+			CreateDate: com.CreateDate.String(),
 			User: &comment.User{
 				Id:              com.User.Id,
 				Name:            com.User.Name,
