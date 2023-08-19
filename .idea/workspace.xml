@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f55cc524-fd67-418e-a194-fb1ec48e5bf3" name="Changes" comment="NavyZ:add">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/biz/handler/api/comment_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/biz/handler/api/comment_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/mw/jwt.go" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/mw/jwt.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comment-service/dal/dao/dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/comment-service/dal/dao/dao.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/comment-service/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/comment-service/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datasource/database/model/comment.go" beforeDir="false" afterPath="$PROJECT_DIR$/datasource/database/model/comment.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datasource/database/mysql.go" beforeDir="false" afterPath="$PROJECT_DIR$/datasource/database/mysql.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +123,7 @@
       <recent name="$PROJECT_DIR$/idl" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build cmd/gateway">
+  <component name="RunManager" selected="Go Build.go build cmd/comment-service">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="dousheng" />
       <working_directory value="$PROJECT_DIR$" />
@@ -174,15 +170,6 @@
       <filePath value="$PROJECT_DIR$/cmd/feed-service/main.go" />
       <method v="2" />
     </configuration>
-    <configuration name="go build cmd/fileServer" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="dousheng" />
-      <working_directory value="$PROJECT_DIR$/cmd" />
-      <kind value="PACKAGE" />
-      <package value="cmd/fileServer" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/cmd/fileServer/main.go" />
-      <method v="2" />
-    </configuration>
     <configuration name="go build cmd/gateway" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="dousheng" />
       <working_directory value="$PROJECT_DIR$/cmd" />
@@ -201,6 +188,14 @@
       <filePath value="$PROJECT_DIR$/cmd/user-service/main.go" />
       <method v="2" />
     </configuration>
+    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="dousheng" />
+      <working_directory value="$PROJECT_DIR$/cmd" />
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/cmd/fileServer/main.go" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
       <module name="dousheng" />
       <working_directory value="$PROJECT_DIR$" />
@@ -212,19 +207,19 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Go Build.go build main.go" />
       <item itemvalue="Go Build.go build cmd/feed-service" />
       <item itemvalue="Go Build.go build cmd/gateway" />
-      <item itemvalue="Go Build.go build cmd/fileServer" />
       <item itemvalue="Go Build.go build cmd/comment-service" />
       <item itemvalue="Go Build.go build cmd/user-service" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build cmd/comment-service" />
         <item itemvalue="Go Build.go build cmd/gateway" />
         <item itemvalue="Go Build.go build cmd/user-service" />
-        <item itemvalue="Go Build.go build cmd/fileServer" />
+        <item itemvalue="Go Build.go build main.go" />
         <item itemvalue="Go Build.go build cmd/feed-service" />
-        <item itemvalue="Go Build.go build cmd/comment-service" />
       </list>
     </recent_temporary>
   </component>

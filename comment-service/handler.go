@@ -93,7 +93,7 @@ func (s *CommentRpcServiceImpl) CommentAction(ctx context.Context, req *comment.
 		com.Who = userID
 
 		com.User = usr.GetUserInfo(userID)
-		IDtodelete := req.GetUid()
+		IDtodelete := *req.CommentId
 		dao.DeleteComment(IDtodelete)
 		resp.StatusMsg = &Msg
 		resp.Comment = &comment.Comment{

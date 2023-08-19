@@ -18,6 +18,8 @@ func AddComment(comment *model.Comment) error {
 	return dal.DB.Create(comment).Error
 }
 
-func DeleteComment(ID int64) {
-	dal.DB.Where("id = ?", ID).Delete(&model.Comment{})
+func DeleteComment(ID1 int64) {
+	dal.DB.Delete(&model.Comment{
+		ID: ID1,
+	})
 }
