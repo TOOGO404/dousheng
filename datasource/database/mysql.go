@@ -46,5 +46,7 @@ func (conf *DSNConf) MigrateDB() error {
 		&model.User{},
 		&model.Video{},
 		&model.Comment{},
+		&model.Message{},
+		&model.Like{},
 	)
 }

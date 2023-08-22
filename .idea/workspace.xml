@@ -5,8 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f55cc524-fd67-418e-a194-fb1ec48e5bf3" name="Changes" comment="NavyZ:add">
-      <change beforePath="$PROJECT_DIR$/comment-service/dal/dao/dao.go" beforeDir="false" afterPath="$PROJECT_DIR$/comment-service/dal/dao/dao.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment-service/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/comment-service/handler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-gateway/rpc/favoriteClient.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmd/favorite-service/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/favorite-service/dal/dao/dao.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/favorite-service/dal/mysql.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/favorite-service/handler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/favorite-service/kitex_info.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/idl/favorite.thrift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/biz/handler/api/favorite_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/biz/handler/api/favorite_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasource/database/model/like.go" beforeDir="false" afterPath="$PROJECT_DIR$/datasource/database/model/like.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasource/database/model/message.go" beforeDir="false" afterPath="$PROJECT_DIR$/datasource/database/model/message.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasource/database/mysql.go" beforeDir="false" afterPath="$PROJECT_DIR$/datasource/database/mysql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.work" beforeDir="false" afterPath="$PROJECT_DIR$/go.work" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +27,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Go File" />
         <option value="Go Application" />
+        <option value="Go File" />
       </list>
     </option>
   </component>
@@ -90,27 +101,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultGoTemplateProperty&quot;: &quot;Go Application&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.automatic.dependencies.download&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;cyx&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/cyx1/Desktop/dousheng&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultGoTemplateProperty": "Go File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "cyx",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "/home/cyx1/Desktop/dousheng",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/tmp" />
@@ -123,7 +134,7 @@
       <recent name="$PROJECT_DIR$/idl" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build cmd/comment-service">
+  <component name="RunManager" selected="Go Build.go build cmd/migrateDB">
     <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
       <module name="dousheng" />
       <working_directory value="$PROJECT_DIR$" />
@@ -161,15 +172,6 @@
       <filePath value="$PROJECT_DIR$/cmd/comment-service/main.go" />
       <method v="2" />
     </configuration>
-    <configuration name="go build cmd/feed-service" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="dousheng" />
-      <working_directory value="$PROJECT_DIR$/cmd" />
-      <kind value="PACKAGE" />
-      <package value="cmd/feed-service" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/cmd/feed-service/main.go" />
-      <method v="2" />
-    </configuration>
     <configuration name="go build cmd/gateway" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="dousheng" />
       <working_directory value="$PROJECT_DIR$/cmd" />
@@ -177,6 +179,15 @@
       <package value="cmd/gateway" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$/cmd/gateway/main.go" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build cmd/migrateDB" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="dousheng" />
+      <working_directory value="$PROJECT_DIR$/cmd" />
+      <kind value="PACKAGE" />
+      <package value="cmd/migrateDB" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/cmd/migrateDB/main.go" />
       <method v="2" />
     </configuration>
     <configuration name="go build cmd/user-service" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
@@ -207,19 +218,19 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Go Build.go build cmd/migrateDB" />
       <item itemvalue="Go Build.go build main.go" />
-      <item itemvalue="Go Build.go build cmd/feed-service" />
       <item itemvalue="Go Build.go build cmd/gateway" />
       <item itemvalue="Go Build.go build cmd/comment-service" />
       <item itemvalue="Go Build.go build cmd/user-service" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build cmd/migrateDB" />
         <item itemvalue="Go Build.go build cmd/comment-service" />
         <item itemvalue="Go Build.go build cmd/gateway" />
         <item itemvalue="Go Build.go build cmd/user-service" />
         <item itemvalue="Go Build.go build main.go" />
-        <item itemvalue="Go Build.go build cmd/feed-service" />
       </list>
     </recent_temporary>
   </component>
@@ -279,6 +290,11 @@
           <url>file://$PROJECT_DIR$/api-gateway/mw/jwt.go</url>
           <line>37</line>
           <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/favorite-service/kitex_gen/favorite/favoriterpcservice/client.go</url>
+          <line>4</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

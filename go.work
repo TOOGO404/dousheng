@@ -5,6 +5,7 @@ use (
 	./cmd
 	./comment-service
 	./datasource
+	./favorite-service
 	./feed-service
 	./fileStorage
 	./user-service
