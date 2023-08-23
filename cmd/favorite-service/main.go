@@ -21,7 +21,7 @@ func main() {
 		server.WithServiceAddr(listen),
 		server.WithRegistry(r),
 		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{
-			ServiceName: "comment-service",
+			ServiceName: "favorite-service",
 		}))
 	err = svr.Run()
 

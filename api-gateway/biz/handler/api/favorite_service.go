@@ -94,7 +94,7 @@ func GetFavoriteList(ctx context.Context, c *app.RequestContext) {
 		}
 		av.PlayURL = video.PlayUrl
 		av.CoverURL = video.CoverUrl
-		av.IsFavorite = true
+		av.IsFavorite = video.IsFavorite
 		av.CommentCount = 0
 		av.FavoriteCount = 0
 		videos[index] = av
