@@ -7,11 +7,13 @@ import (
 	"api-gateway/rpc"
 	"comment-service/kitex_gen/comment"
 	"context"
-	"github.com/cloudwego/hertz/pkg/app"
-	"github.com/cloudwego/hertz/pkg/protocol/consts"
 	"log"
 	"net/http"
 	"user-service/kitex_gen/user"
+
+	"github.com/cloudwego/hertz/pkg/app"
+	"github.com/cloudwego/hertz/pkg/common/utils"
+	"github.com/cloudwego/hertz/pkg/protocol/consts"
 )
 
 var Okmsg string = "ok"
@@ -76,7 +78,7 @@ func CommentAction(ctx context.Context, c *app.RequestContext) {
 			CommentId:  req.CommentID,
 		})
 		if err != nil {
-
+			c.JSON(consts.StatusInternalServerError, utils.H{})
 		}
 
 		resp.StatusCode = 0
@@ -115,17 +117,13 @@ func GetComment(ctx context.Context, c *app.RequestContext) {
 	}
 
 	uid := c.GetInt64("uid")
-
 	rpcResp, _ := rpc.CommentRPCClient.CommentGet(ctx, &comment.CommentListRequest{
 		Uid:     uid,
 		VideoId: req.VideoID,
 	})
-
-	log.Println(uid)
 	resp := new(api.CommentListResponse)
 	resp.StatusCode = 0
 	resp.StatusMsg = &Okmsg
-
 	Comments := make([]*api.Comment, len(rpcResp.CommentList))
 	for index, _comment := range rpcResp.CommentList {
 		com := new(api.Comment)
@@ -144,9 +142,9 @@ func GetComment(ctx context.Context, c *app.RequestContext) {
 			Name:            usrrpcResp.UserInfo.Name,
 			FollowerCount:   usrrpcResp.UserInfo.FollowerCount,
 			IsFollow:        true,
-			Avatar:          usrrpcResp.UserInfo.Avatar,
-			BackgroundImage: usrrpcResp.UserInfo.BackgroundImage,
-			Signature:       usrrpcResp.UserInfo.Signature}
+			Avatar:          &usrrpcResp.UserInfo.Avatar,
+			BackgroundImage: &usrrpcResp.UserInfo.BackgroundImage,
+			Signature:       &usrrpcResp.UserInfo.Signature}
 		Comments[index] = com
 	}
 	resp.CommentList = Comments

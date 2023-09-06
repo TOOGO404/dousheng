@@ -3,11 +3,12 @@ package main
 import (
 	comment_service "comment-service"
 	comment "comment-service/kitex_gen/comment/commentrpcservice"
+	"log"
+	"net"
+
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
 	etcd "github.com/kitex-contrib/registry-etcd"
-	"log"
-	"net"
 )
 
 func main() {
@@ -16,7 +17,7 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	listen, _ := net.ResolveTCPAddr("tcp", ":8083")
+	listen, _ := net.ResolveTCPAddr("tcp", ":8084")
 	svr := comment.NewServer(new(comment_service.CommentRpcServiceImpl),
 		server.WithServiceAddr(listen),
 		server.WithRegistry(r),

@@ -1,13 +1,17 @@
-go 1.21
+go 1.20
 
 use (
 	./api-gateway
 	./cmd
 	./comment-service
 	./datasource
+	./favorite-service
 	./feed-service
 	./fileStorage
+	./msg-service
 	./publish-service
+	./relationship-service
+	./transcoding-service
 	./user-service
 	./utils
 )

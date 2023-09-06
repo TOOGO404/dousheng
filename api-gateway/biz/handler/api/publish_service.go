@@ -6,58 +6,59 @@ import (
 	api "api-gateway/biz/model/api"
 	"api-gateway/rpc"
 	"context"
+	"io"
 	"publish-service/kitex_gen/publish"
+	"strings"
+	"user-service/kitex_gen/user"
 
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
-	"mime/multipart"
-	"io/ioutil"
 )
 
 // PublishAction .
 // @router /douyin/publish/action/ [POST]
 func PublishAction(ctx context.Context, c *app.RequestContext) {
-		// var err error
-		// var req api.PublishActionRequest
-		// err = c.BindAndValidate(&req)
-		// if err != nil {
-		// 	c.String(consts.StatusBadRequest, err.Error())
-		// 	return
-		// }
-		data, err := c.FormFile("video")
-		if err != nil {
-			c.String(consts.StatusBadRequest,"没有上传视频")
-		}		
+	var err error
+	fh, err := c.FormFile("data")
+	if err != nil {
+		panic(err)
+	}
+	f, err := fh.Open()
+	if err != nil {
+		panic(err)
+	}
+	data, err := io.ReadAll(f)
+	if err != nil {
+		panic(err)
+	}
 
-		fileHandle, err1 := data.Open() //打开上传文件
-		if err1 != nil {
-			c.String(consts.StatusBadRequest,"打开文件失败")
-		}
+	title := c.FormValue("title")
+	id := c.GetInt64("uid")
+	if id == 0 {
+		c.JSON(consts.StatusUnauthorized, &api.PublishActionResponse{
+			StatusCode: -1,
+			StatusMsg:  nil,
+		})
+	}
+	s := strings.Split(fh.Filename, ".")
+	_, err = rpc.PublishRPCClient.PublishAction(ctx, &publish.VideoData{
+		Title:    string(title),
+		Data:     data,
+		Uid:      id,
+		FileType: s[len(s)-1],
+	})
+	if err == nil {
+		c.JSON(consts.StatusOK, &api.PublishActionResponse{
+			StatusCode: 0,
+			StatusMsg:  nil,
+		})
+	} else {
+		c.JSON(consts.StatusInternalServerError, api.PublishActionResponse{
+			StatusCode: 2,
+			StatusMsg:  nil,
+		})
+	}
 
-		// 闭包处理错误
-		defer func(fileHandle multipart.File) {
-			err := fileHandle.Close()
-			if err != nil {
-				c.String(consts.StatusBadRequest,"关闭文件错误")
-			}
-		}(fileHandle)
-
-		// 将视频文件转成二进制
-		fileByte, err2 := ioutil.ReadAll(fileHandle)
-		if err2 != nil {
-			c.String(consts.StatusBadRequest,"读取文件错误")
-		}
-		
-		rpcResp, _ := rpc.PublishRPCClient.PublishAction(ctx,&publish.VideoData{
-				Data: fileByte,
-				Title: data.Filename,
-			})
-		// 将视频保存到本地 /home/lixiaohui/temp/video (测试：视频暂时在此处保存)
-		err3 := c.SaveUploadedFile(data, "/home/lixiaohui/temp/video/" + data.Filename)
-		if err3 != nil {
-			c.String(consts.StatusBadRequest,"视频保存失败")
-		}
-		c.JSON(consts.StatusOK, rpcResp.VideoId)
 }
 
 // GetPublishList .
@@ -70,8 +71,49 @@ func GetPublishList(ctx context.Context, c *app.RequestContext) {
 		c.String(consts.StatusBadRequest, err.Error())
 		return
 	}
-
+	id := c.GetInt64("uid")
+	pubRpcResp, err := rpc.PublishRPCClient.GetPublishLish(ctx, &publish.PublishListReq{
+		UserId: req.UserID,
+	})
+	if err != nil {
+		panic(err)
+	}
+	userRpcResp, err := rpc.UserRPCClient.GetUserInfo(ctx, &user.UserInfoReq{
+		SendReqUserId: id,
+		ReqUserId:     req.UserID,
+	})
+	if err != nil {
+		panic(err)
+	}
 	resp := new(api.PublishListResponse)
-
+	resp.StatusCode = 0
+	resp.StatusMsg = nil
+	resp.VideoList = make([]*api.Video, len(pubRpcResp.VideoList))
+	userInfo := userRpcResp.UserInfo
+	for idx, video := range pubRpcResp.VideoList {
+		resp.VideoList[idx] = &api.Video{
+			ID: video.Id,
+			Author: &api.User{
+				ID:              video.AuthorID,
+				Name:            userInfo.Name,
+				Avatar:          &userInfo.Avatar,
+				BackgroundImage: &userInfo.BackgroundImage,
+				FollowCount:     &userInfo.FollowCount,
+				FollowerCount:   userInfo.FollowerCount,
+				Signature:       &userInfo.Signature,
+				IsFollow:        userInfo.IsFollow,
+				WorkCount:       &userInfo.WorkCount,
+				FaviriteCount:   &userInfo.FollowCount,
+				TotalFavorited:  &userInfo.TotalFavorited,
+			},
+			PlayURL:  video.PlayUrl,
+			CoverURL: video.CoverUrl,
+			Title:    video.Title,
+			//todo
+			FavoriteCount: 0,
+			CommentCount:  0,
+			IsFavorite:    false,
+		}
+	}
 	c.JSON(consts.StatusOK, resp)
 }

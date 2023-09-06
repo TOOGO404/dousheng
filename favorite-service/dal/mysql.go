@@ -1,7 +1,8 @@
-package publish_service
+package dal
 
 import (
 	"datasource/database"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )

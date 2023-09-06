@@ -12,7 +12,7 @@ struct User {
     6: optional string avatar
     7: optional string background_image
     8: optional string signature
-    9: optional string total_favorited
+    9: optional i64 total_favorited
     10: optional i64 work_count
     11: optional i64 favirite_count
 }

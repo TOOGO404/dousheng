@@ -33,8 +33,8 @@ func Register(r *server.Hertz) {
 		{
 			_favorite := _douyin.Group("/favorite", _favoriteMw()...)
 			{
-				_dao := _favorite.Group("/dao", _daoMw()...)
-				_dao.POST("/", append(_favoriteactionMw(), api.FavoriteAction)...)
+				_action0 := _favorite.Group("/action", _action0Mw()...)
+				_action0.POST("/", append(_favoriteactionMw(), api.FavoriteAction)...)
 			}
 			{
 				_list0 := _favorite.Group("/list", _list0Mw()...)
@@ -48,8 +48,8 @@ func Register(r *server.Hertz) {
 		{
 			_message := _douyin.Group("/message", _messageMw()...)
 			{
-				_action0 := _message.Group("/action", _action0Mw()...)
-				_action0.POST("/", append(_messageactionMw(), api.MessageAction)...)
+				_action1 := _message.Group("/action", _action1Mw()...)
+				_action1.POST("/", append(_messageactionMw(), api.MessageAction)...)
 			}
 			{
 				_chat := _message.Group("/chat", _chatMw()...)
@@ -59,8 +59,8 @@ func Register(r *server.Hertz) {
 		{
 			_publish := _douyin.Group("/publish", _publishMw()...)
 			{
-				_action1 := _publish.Group("/action", _action1Mw()...)
-				_action1.POST("/", append(_publishactionMw(), api.PublishAction)...)
+				_action2 := _publish.Group("/action", _action2Mw()...)
+				_action2.POST("/", append(_publishactionMw(), api.PublishAction)...)
 			}
 			{
 				_list1 := _publish.Group("/list", _list1Mw()...)
@@ -70,8 +70,8 @@ func Register(r *server.Hertz) {
 		{
 			_relation := _douyin.Group("/relation", _relationMw()...)
 			{
-				_action2 := _relation.Group("/action", _action2Mw()...)
-				_action2.POST("/", append(_relationactionMw(), api.RelationAction)...)
+				_action3 := _relation.Group("/action", _action3Mw()...)
+				_action3.POST("/", append(_relationactionMw(), api.RelationAction)...)
 			}
 			{
 				_follow := _relation.Group("/follow", _followMw()...)

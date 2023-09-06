@@ -4,24 +4,64 @@ package api
 
 import (
 	"context"
+	"log"
+	"relationship-service/kitex_gen/relationship"
 
 	api "api-gateway/biz/model/api"
+	"api-gateway/rpc"
+
 	"github.com/cloudwego/hertz/pkg/app"
+	"github.com/cloudwego/hertz/pkg/common/utils"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
 )
 
 // RelationAction .
 // @router /douyin/relation/dao/ [POST]
+
+var ACT_FAILED = "action failed"
+
+var ACT_OBJ_ERR = "你不能对自己操作"
+var NO_LOGIN_ERR = "please login at first"
+
 func RelationAction(ctx context.Context, c *app.RequestContext) {
 	var err error
 	var req api.RelationActionRequest
 	err = c.BindAndValidate(&req)
+
 	if err != nil {
 		c.String(consts.StatusBadRequest, err.Error())
+		c.Abort()
+		return
+	}
+	resp := new(api.RelationActionResponse)
+	who := c.GetInt64("uid")
+	if who == 0 {
+		c.JSON(consts.StatusUnauthorized, utils.H{
+			"status_code": 2,
+			"status_msg":  NO_LOGIN_ERR,
+		})
+		c.Abort()
+		return
+	} else if who == req.ToUserID {
+		resp.StatusCode = -1
+		resp.StatusMsg = &ACT_OBJ_ERR
 		return
 	}
 
-	resp := new(api.RelationActionResponse)
+	ok, err := rpc.RelationRPCClient.Sub(ctx,
+		&relationship.SubActionReq{
+			Who:        who,
+			ToUserId:   req.ToUserID,
+			ActionType: req.ActionType,
+		})
+	if ok {
+		resp.StatusCode = 0
+		resp.StatusMsg = nil
+	} else {
+		resp.StatusCode = 1
+		resp.StatusMsg = &ACT_FAILED
+		log.Println(err.Error())
+	}
 
 	c.JSON(consts.StatusOK, resp)
 }
@@ -34,10 +74,35 @@ func GetRelationFollowList(ctx context.Context, c *app.RequestContext) {
 	err = c.BindAndValidate(&req)
 	if err != nil {
 		c.String(consts.StatusBadRequest, err.Error())
+		c.Abort()
 		return
 	}
 
+	rpcResp, err := rpc.RelationRPCClient.GetSubList(ctx,
+		&relationship.SubListReq{
+			Who: req.UserID,
+		})
 	resp := new(api.RelationFollowListResponse)
+	if err != nil {
+		c.JSON(consts.StatusUnauthorized, utils.H{
+			"status_code": 0,
+			"status_msg":  "error",
+		})
+	}
+	resp.StatusCode = 0
+	i := len(rpcResp.FollowList)
+	log.Println("ido ", i)
+	if i != 0 {
+		resp.UserList = make([]*api.User, i)
+		for idx, item := range rpcResp.FollowList {
+			resp.UserList[idx] = &api.User{
+				ID:       item.Id,
+				Name:     item.Name,
+				IsFollow: item.IsFollow,
+				Avatar:   &item.Avatar,
+			}
+		}
+	}
 
 	c.JSON(consts.StatusOK, resp)
 }
@@ -50,11 +115,32 @@ func GetRelationFollowerList(ctx context.Context, c *app.RequestContext) {
 	err = c.BindAndValidate(&req)
 	if err != nil {
 		c.String(consts.StatusBadRequest, err.Error())
+		c.Abort()
 		return
 	}
-
+	rpcRes, err := rpc.RelationRPCClient.GetFollowerList(ctx,
+		&relationship.FollowerListReq{
+			Who: req.UserID,
+		})
 	resp := new(api.RelationFollowerListResponse)
-
+	if err != nil {
+		c.JSON(consts.StatusUnauthorized, utils.H{
+			"status_code": 0,
+			"status_msg":  "error",
+		})
+	}
+	resp.StatusCode = 0
+	ls := make([]*api.User, len(rpcRes.FollowerList))
+	for idx, res := range rpcRes.FollowerList {
+		ls[idx] = &api.User{
+			ID:       res.Id,
+			Name:     res.Name,
+			Avatar:   &res.Avatar,
+			IsFollow: res.IsFollow,
+		}
+	}
+	resp.UserList = ls
+	log.Println(len(resp.UserList))
 	c.JSON(consts.StatusOK, resp)
 }
 
@@ -63,13 +149,36 @@ func GetRelationFollowerList(ctx context.Context, c *app.RequestContext) {
 func GetRelationFriendList(ctx context.Context, c *app.RequestContext) {
 	var err error
 	var req api.RelationFriendListRequest
+	uid := c.GetInt64("uid")
 	err = c.BindAndValidate(&req)
-	if err != nil {
+	if err != nil || uid != req.UserID {
 		c.String(consts.StatusBadRequest, err.Error())
+		c.Abort()
 		return
 	}
 
 	resp := new(api.RelationFriendListResponse)
+	rpcResp, err := rpc.RelationRPCClient.GetFriendList(ctx, &relationship.FriendlistReq{
+		Who: req.UserID,
+	})
 
+	if err != nil {
+		resp.StatusCode = 1
+		resp.StatusMsg = nil
+		c.JSON(consts.StatusInternalServerError, resp)
+		return
+	}
+	var l = len(rpcResp.FriendList)
+	if l != 0 {
+		resp.UserList = make([]*api.FriendUser, l)
+		for idx, item := range rpcResp.FriendList {
+			resp.UserList[idx] = &api.FriendUser{
+				ID:       item.Id,
+				Name:     item.Name,
+				Avatar:   &item.Avatar,
+				IsFollow: true,
+			}
+		}
+	}
 	c.JSON(consts.StatusOK, resp)
 }

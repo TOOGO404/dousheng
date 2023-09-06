@@ -3,6 +3,7 @@ package database
 import (
 	"datasource/database/model"
 	"fmt"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -46,5 +47,8 @@ func (conf *DSNConf) MigrateDB() error {
 		&model.User{},
 		&model.Video{},
 		&model.Comment{},
+		&model.Sub{},
+		&model.Like{},
+		&model.Message{},
 	)
 }

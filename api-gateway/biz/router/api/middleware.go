@@ -4,12 +4,15 @@ package api
 
 import (
 	"api-gateway/mw"
+
 	"github.com/cloudwego/hertz/pkg/app"
 )
 
 func rootMw() []app.HandlerFunc {
 	// your code...
-	return []app.HandlerFunc{mw.JWTCheck}
+	return []app.HandlerFunc{
+		mw.JWTCheck,
+	}
 }
 
 func _douyinMw() []app.HandlerFunc {
@@ -22,7 +25,7 @@ func _commentMw() []app.HandlerFunc {
 	return nil
 }
 
-func _daoMw() []app.HandlerFunc {
+func _actionMw() []app.HandlerFunc {
 	// your code...
 	return nil
 }
@@ -47,7 +50,7 @@ func _favoriteMw() []app.HandlerFunc {
 	return nil
 }
 
-func _dao0Mw() []app.HandlerFunc {
+func _action0Mw() []app.HandlerFunc {
 	// your code...
 	return nil
 }
@@ -82,6 +85,16 @@ func _messageMw() []app.HandlerFunc {
 	return nil
 }
 
+func _action1Mw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
+func _messageactionMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
+
 func _chatMw() []app.HandlerFunc {
 	// your code...
 	return nil
@@ -92,22 +105,12 @@ func _getmessagechatMw() []app.HandlerFunc {
 	return nil
 }
 
-func _dao1Mw() []app.HandlerFunc {
-	// your code...
-	return nil
-}
-
-func _messageactionMw() []app.HandlerFunc {
-	// your code...
-	return nil
-}
-
 func _publishMw() []app.HandlerFunc {
 	// your code...
 	return nil
 }
 
-func _dao2Mw() []app.HandlerFunc {
+func _action2Mw() []app.HandlerFunc {
 	// your code...
 	return nil
 }
@@ -132,7 +135,7 @@ func _relationMw() []app.HandlerFunc {
 	return nil
 }
 
-func _dao3Mw() []app.HandlerFunc {
+func _action3Mw() []app.HandlerFunc {
 	// your code...
 	return nil
 }
@@ -213,26 +216,6 @@ func _registerMw() []app.HandlerFunc {
 }
 
 func _register0Mw() []app.HandlerFunc {
-	// your code...
-	return nil
-}
-
-func _actionMw() []app.HandlerFunc {
-	// your code...
-	return nil
-}
-
-func _action0Mw() []app.HandlerFunc {
-	// your code...
-	return nil
-}
-
-func _action1Mw() []app.HandlerFunc {
-	// your code...
-	return nil
-}
-
-func _action2Mw() []app.HandlerFunc {
 	// your code...
 	return nil
 }

@@ -12,10 +12,11 @@ struct Video {
 
 
 struct FeedReq {
-    1: i64 latest_time
+    1:required i64 latest_time
 }
 struct FeedResp {
     1: list<Video> video_list
+    2: i64 next_time
 }
 
 service FeedRpcService {

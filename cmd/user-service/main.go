@@ -1,9 +1,6 @@
 package main
 
 import (
-	"github.com/cloudwego/kitex/pkg/rpcinfo"
-	"github.com/cloudwego/kitex/server"
-	etcd "github.com/kitex-contrib/registry-etcd"
 	"log"
 	"net"
 	"sync"
@@ -11,6 +8,10 @@ import (
 	user_service "user-service"
 	user "user-service/kitex_gen/user/userrpcservice"
 	"utils"
+
+	"github.com/cloudwego/kitex/pkg/rpcinfo"
+	"github.com/cloudwego/kitex/server"
+	etcd "github.com/kitex-contrib/registry-etcd"
 )
 
 func main() {

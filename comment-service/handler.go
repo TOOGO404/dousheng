@@ -1,14 +1,17 @@
 package comment_service
 
 import (
+	"api-gateway/rpc"
 	"comment-service/dal/dao"
 	comment "comment-service/kitex_gen/comment"
 	"context"
 	"datasource/database/model"
-	"log"
-	"net/http"
+	"fmt"
 	"time"
 	usr "user-service/dal/dao"
+	"user-service/kitex_gen/user"
+
+	"github.com/cloudwego/hertz/pkg/protocol/consts"
 )
 
 type CommentRpcServiceImpl struct{}
@@ -23,102 +26,90 @@ func (s *CommentRpcServiceImpl) CommentGet(ctx context.Context, req *comment.Com
 	comments := make([]*comment.Comment, len(commentList))
 	for index, cm := range commentList {
 		tmp := new(comment.Comment)
-
 		tmp.Id = cm.ID
 		tmp.Content = cm.Content
-		tmp.CreateDate = cm.CreateDate.String()
+		t := time.Unix(cm.CreatedAt, 0)
+		tmp.CreateDate = fmt.Sprintf("%2d-%2d", t.Month(), t.Day())
 		dbusr := usr.GetUserInfo(cm.Who)
 		_usr := new(comment.User)
 		_usr.Id = dbusr.Id
 		_usr.Name = dbusr.Name
 		_usr.Avatar = &dbusr.Avatar
 		_usr.BackgroundImage = &dbusr.Backgroud
-
 		_usr.Signature = &dbusr.Signature
-
 		tmp.User = _usr
 		comments[index] = tmp
 	}
-	log.Println("len:", len(comments))
 	resp.CommentList = comments
 	return resp, nil
 }
 
-func (s *CommentRpcServiceImpl) CommentAction(ctx context.Context, req *comment.CommentActionRequest) (r *comment.CommentActionResponse, err error) {
-	act := req.ActionType
+const ADD_COMMENT = 1
+const REMOVE_COMMNET = 2
+
+func (s *CommentRpcServiceImpl) CommentAction(ctx context.Context, req *comment.CommentActionRequest) (*comment.CommentActionResponse, error) {
+
 	resp := new(comment.CommentActionResponse)
-	log.Println(req)
-	switch act {
-	case 1:
-		com := new(model.Comment)
-		com.Content = *req.CommentText
-		com.VideoID = req.VideoId
-		com.Who = req.Uid
-		com.User = usr.GetUserInfo(com.Who)
-		com.CreateDate = time.Now()
-		err := dao.AddComment(com)
-		if err != nil {
-			log.Println("Here")
-			return nil, err
+	switch req.ActionType {
+	case ADD_COMMENT:
+		{
+			_comment := new(model.Comment)
+			_comment.Content = *req.CommentText
+			_comment.VideoID = req.VideoId
+			_comment.Who = req.Uid
+			if req.CommentId != nil {
+				_comment.SendTo = *req.CommentId
+			}
+			_comment.CreatedAt = time.Now().Unix()
+			cmt_id, err := dao.AddComment(_comment)
+			if err != nil {
+				return nil, err
+			}
+			dbusr := usr.GetUserInfo(_comment.Who)
+			resp.StatusMsg = &Msg
+			resp.StatusCode = consts.StatusOK
+			rpcResp, _ := rpc.UserRPCClient.GetUserInfo(ctx, &user.UserInfoReq{
+				SendReqUserId: req.Uid,
+				ReqUserId:     dbusr.Id,
+			})
+			resp.Comment = &comment.Comment{
+				Id:      cmt_id,
+				Content: _comment.Content,
+				User: &comment.User{
+					Id:   dbusr.Id,
+					Name: dbusr.Name,
+					//todo here
+					FollowCount:     &rpcResp.UserInfo.FollowCount,
+					FaviriteCount:   &rpcResp.UserInfo.FaviriteCount,
+					FollowerCount:   rpcResp.UserInfo.FollowerCount,
+					IsFollow:        rpcResp.UserInfo.IsFollow,
+					Avatar:          &rpcResp.UserInfo.Avatar,
+					Signature:       &rpcResp.UserInfo.Signature,
+					BackgroundImage: &rpcResp.UserInfo.BackgroundImage,
+					TotalFavorited:  &rpcResp.UserInfo.TotalFavorited,
+					WorkCount:       &rpcResp.UserInfo.WorkCount,
+				},
+			}
+			return resp, nil
 		}
-
-		resp.StatusMsg = &Msg
-		resp.StatusCode = http.StatusOK
-
-		resp.Comment = &comment.Comment{
-			Id:         com.ID,
-			Content:    com.Content,
-			CreateDate: com.CreateDate.String(),
-			User: &comment.User{
-				Id:              com.User.Id,
-				Name:            com.User.Name,
-				FollowCount:     &Tmp,
-				FaviriteCount:   &Tmp,
-				FollowerCount:   0,
-				IsFollow:        true,
-				Avatar:          &Msg,
-				Signature:       &Msg,
-				BackgroundImage: &Msg,
-				TotalFavorited:  &Msg,
-				WorkCount:       &Tmp,
-			},
+	case REMOVE_COMMNET:
+		{
+			willDelCommentId := req.GetUid()
+			dao.DeleteComment(willDelCommentId)
+			resp.StatusCode = 0
+			resp.StatusMsg = &Msg
+			return resp, nil
 		}
-		return r, nil
-
-	case 2:
-		com := new(model.Comment)
-		com.Content = req.GetCommentText()
-		com.VideoID = req.GetVideoId()
-		userID := req.GetUid()
-		com.Who = userID
-
-		com.User = usr.GetUserInfo(userID)
-		IDtodelete := req.GetUid()
-		dao.DeleteComment(IDtodelete)
-		resp.StatusMsg = &Msg
-		resp.Comment = &comment.Comment{
-			Id:         com.ID,
-			Content:    com.Content,
-			CreateDate: com.CreateDate.String(),
-			User: &comment.User{
-				Id:              com.User.Id,
-				Name:            com.User.Name,
-				FollowCount:     &Tmp,
-				FaviriteCount:   &Tmp,
-				FollowerCount:   0,
-				IsFollow:        true,
-				Avatar:          &Msg,
-				Signature:       &Msg,
-				BackgroundImage: &Msg,
-				TotalFavorited:  &Msg,
-				WorkCount:       &Tmp,
-			},
+	default:
+		{
+			resp.StatusMsg = &Wrongmsg
+			resp.StatusCode = consts.StatusBadRequest
+			resp.Comment = nil
+			return resp, fmt.Errorf("bad action type")
 		}
-		resp.StatusCode = http.StatusOK
-		return resp, nil
 	}
-	resp.StatusMsg = &Wrongmsg
-	resp.StatusCode = http.StatusBadRequest
-	resp.Comment = nil
-	return resp, nil
+}
+
+func (s *CommentRpcServiceImpl) GetCommentCnt(ctx context.Context, vid int64) (int64, error) {
+	return dao.GetCommentCnt(vid), nil
 }

@@ -4,25 +4,30 @@ package api
 
 import (
 	api "api-gateway/biz/model/api"
+	"api-gateway/cache"
 	"api-gateway/mw"
 	"api-gateway/rpc"
 	"context"
+	"errors"
+	"log"
+	"net/http"
+	"time"
+	"user-service/kitex_gen/user"
+
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/common/utils"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
-	"log"
-	"net/http"
-	"user-service/kitex_gen/user"
+	"github.com/redis/go-redis/v9"
 )
 
 var signedTokenErr api.RegisterResponse
 var existsTheSameEmailErr api.RegisterResponse
 
 func init() {
-	var sErrMsg = "获取token失败"
+	var fErrMsg = "获取token失败"
 	signedTokenErr = api.RegisterResponse{
 		StatusCode: -2,
-		StatusMsg:  &sErrMsg,
+		StatusMsg:  &fErrMsg,
 		UserID:     0,
 		Token:      "",
 	}
@@ -43,10 +48,8 @@ func Register(ctx context.Context, c *app.RequestContext) {
 	err = c.BindAndValidate(&req)
 	if err != nil {
 		c.String(consts.StatusBadRequest, err.Error())
-		c.Abort()
 		return
 	}
-
 	rpcResp, err := rpc.UserRPCClient.UserRegister(ctx, &user.RegisterReq{
 		Email: req.Email,
 		Pwd:   req.Password,
@@ -64,7 +67,6 @@ func Register(ctx context.Context, c *app.RequestContext) {
 		resp.UserID = rpcResp.Uid
 		c.JSON(consts.StatusOK, resp)
 	}
-
 }
 
 // Login .
@@ -78,15 +80,37 @@ func Login(ctx context.Context, c *app.RequestContext) {
 		c.Abort()
 		return
 	}
+	userKey := req.Username
+	times, err := cache.RdsClient.Get(ctx, userKey).Int()
+	if errors.Is(err, redis.Nil) {
+		cache.RdsClient.Set(ctx, userKey, 0, time.Second*86400)
+	} else if times > 2 {
+		log.Println("连续输入错误密码次数超过限制")
+		c.JSON(consts.StatusOK, utils.H{
+			"status_code": -1,
+			"status_msg":  "连续输入错误密码次数超过限制,请明天再试试",
+			"user_id":     0,
+			"token":       "",
+		})
+		return
+	}
 	rpcResp, err := rpc.UserRPCClient.UserLogin(ctx, &user.LoginReq{
 		Email: req.Username,
 		Pwd:   req.Password,
 	})
 	if err != nil {
-
+		cache.RdsClient.Incr(ctx, userKey)
+		c.JSON(consts.StatusOK, utils.H{
+			"status_code": -2,
+			"status_msg":  "密码错误",
+			"user_id":     0,
+			"token":       "",
+		})
+		return
 	}
+	cache.RdsClient.Del(ctx, userKey)
 	resp := new(api.LoginResponse)
-	tokenStr, err := mw.SignedToken(rpcResp.Uid)
+	tokenStr, _ := mw.SignedToken(rpcResp.Uid)
 	resp.Token = tokenStr
 	resp.StatusCode = 0
 	resp.UserID = rpcResp.Uid
@@ -117,20 +141,24 @@ func GetUserInfo(ctx context.Context, c *app.RequestContext) {
 			SendReqUserId: uid,
 			ReqUserId:     req.UserID,
 		})
-		log.Println(uid)
 		resp := new(api.UserInfoResponse)
 		resp.StatusCode = 0
 
 		resp.StatusMsg = nil
+		//todo
 		resp.User = &api.User{
-			ID:              req.UserID,
+			ID:              rpcResp.UserInfo.Id,
 			Name:            rpcResp.UserInfo.Name,
+			Avatar:          &rpcResp.UserInfo.Avatar,
+			BackgroundImage: &rpcResp.UserInfo.BackgroundImage,
+			Signature:       &rpcResp.UserInfo.Signature,
+			FollowCount:     &rpcResp.UserInfo.FollowCount,
 			FollowerCount:   rpcResp.UserInfo.FollowerCount,
-			IsFollow:        true,
-			Avatar:          rpcResp.UserInfo.Avatar,
-			BackgroundImage: rpcResp.UserInfo.BackgroundImage,
-			Signature:       rpcResp.UserInfo.Signature}
+			IsFollow:        rpcResp.UserInfo.IsFollow,
+			FaviriteCount:   &rpcResp.UserInfo.FaviriteCount,
+			WorkCount:       &rpcResp.UserInfo.WorkCount,
+			TotalFavorited:  &rpcResp.UserInfo.TotalFavorited,
+		}
 		c.JSON(consts.StatusOK, resp)
 	}
-
 }

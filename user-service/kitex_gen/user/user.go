@@ -830,17 +830,17 @@ func (p *LoginResp) Field3DeepEqual(src int64) bool {
 }
 
 type UserInfo struct {
-	Id              int64   `thrift:"id,1,required" frugal:"1,required,i64" json:"id"`
-	Name            string  `thrift:"name,2,required" frugal:"2,required,string" json:"name"`
-	FollowCount     *int64  `thrift:"follow_count,3,optional" frugal:"3,optional,i64" json:"follow_count,omitempty"`
-	FollowerCount   int64   `thrift:"follower_count,4,required" frugal:"4,required,i64" json:"follower_count"`
-	IsFollow        bool    `thrift:"is_follow,5,required" frugal:"5,required,bool" json:"is_follow"`
-	Avatar          *string `thrift:"avatar,6,optional" frugal:"6,optional,string" json:"avatar,omitempty"`
-	BackgroundImage *string `thrift:"background_image,7,optional" frugal:"7,optional,string" json:"background_image,omitempty"`
-	Signature       *string `thrift:"signature,8,optional" frugal:"8,optional,string" json:"signature,omitempty"`
-	TotalFavorited  *string `thrift:"total_favorited,9,optional" frugal:"9,optional,string" json:"total_favorited,omitempty"`
-	WorkCount       *int64  `thrift:"work_count,10,optional" frugal:"10,optional,i64" json:"work_count,omitempty"`
-	FaviriteCount   *int64  `thrift:"favirite_count,11,optional" frugal:"11,optional,i64" json:"favirite_count,omitempty"`
+	Id              int64  `thrift:"id,1,required" frugal:"1,required,i64" json:"id"`
+	Name            string `thrift:"name,2,required" frugal:"2,required,string" json:"name"`
+	FollowCount     int64  `thrift:"follow_count,3,required" frugal:"3,required,i64" json:"follow_count"`
+	FollowerCount   int64  `thrift:"follower_count,4,required" frugal:"4,required,i64" json:"follower_count"`
+	IsFollow        bool   `thrift:"is_follow,5,required" frugal:"5,required,bool" json:"is_follow"`
+	Avatar          string `thrift:"avatar,6,required" frugal:"6,required,string" json:"avatar"`
+	BackgroundImage string `thrift:"background_image,7,required" frugal:"7,required,string" json:"background_image"`
+	Signature       string `thrift:"signature,8,required" frugal:"8,required,string" json:"signature"`
+	TotalFavorited  int64  `thrift:"total_favorited,9,required" frugal:"9,required,i64" json:"total_favorited"`
+	WorkCount       int64  `thrift:"work_count,10,required" frugal:"10,required,i64" json:"work_count"`
+	FaviriteCount   int64  `thrift:"favirite_count,11,required" frugal:"11,required,i64" json:"favirite_count"`
 }
 
 func NewUserInfo() *UserInfo {
@@ -859,13 +859,8 @@ func (p *UserInfo) GetName() (v string) {
 	return p.Name
 }
 
-var UserInfo_FollowCount_DEFAULT int64
-
 func (p *UserInfo) GetFollowCount() (v int64) {
-	if !p.IsSetFollowCount() {
-		return UserInfo_FollowCount_DEFAULT
-	}
-	return *p.FollowCount
+	return p.FollowCount
 }
 
 func (p *UserInfo) GetFollowerCount() (v int64) {
@@ -876,58 +871,28 @@ func (p *UserInfo) GetIsFollow() (v bool) {
 	return p.IsFollow
 }
 
-var UserInfo_Avatar_DEFAULT string
-
 func (p *UserInfo) GetAvatar() (v string) {
-	if !p.IsSetAvatar() {
-		return UserInfo_Avatar_DEFAULT
-	}
-	return *p.Avatar
+	return p.Avatar
 }
-
-var UserInfo_BackgroundImage_DEFAULT string
 
 func (p *UserInfo) GetBackgroundImage() (v string) {
-	if !p.IsSetBackgroundImage() {
-		return UserInfo_BackgroundImage_DEFAULT
-	}
-	return *p.BackgroundImage
+	return p.BackgroundImage
 }
-
-var UserInfo_Signature_DEFAULT string
 
 func (p *UserInfo) GetSignature() (v string) {
-	if !p.IsSetSignature() {
-		return UserInfo_Signature_DEFAULT
-	}
-	return *p.Signature
+	return p.Signature
 }
 
-var UserInfo_TotalFavorited_DEFAULT string
-
-func (p *UserInfo) GetTotalFavorited() (v string) {
-	if !p.IsSetTotalFavorited() {
-		return UserInfo_TotalFavorited_DEFAULT
-	}
-	return *p.TotalFavorited
+func (p *UserInfo) GetTotalFavorited() (v int64) {
+	return p.TotalFavorited
 }
-
-var UserInfo_WorkCount_DEFAULT int64
 
 func (p *UserInfo) GetWorkCount() (v int64) {
-	if !p.IsSetWorkCount() {
-		return UserInfo_WorkCount_DEFAULT
-	}
-	return *p.WorkCount
+	return p.WorkCount
 }
 
-var UserInfo_FaviriteCount_DEFAULT int64
-
 func (p *UserInfo) GetFaviriteCount() (v int64) {
-	if !p.IsSetFaviriteCount() {
-		return UserInfo_FaviriteCount_DEFAULT
-	}
-	return *p.FaviriteCount
+	return p.FaviriteCount
 }
 func (p *UserInfo) SetId(val int64) {
 	p.Id = val
@@ -935,7 +900,7 @@ func (p *UserInfo) SetId(val int64) {
 func (p *UserInfo) SetName(val string) {
 	p.Name = val
 }
-func (p *UserInfo) SetFollowCount(val *int64) {
+func (p *UserInfo) SetFollowCount(val int64) {
 	p.FollowCount = val
 }
 func (p *UserInfo) SetFollowerCount(val int64) {
@@ -944,22 +909,22 @@ func (p *UserInfo) SetFollowerCount(val int64) {
 func (p *UserInfo) SetIsFollow(val bool) {
 	p.IsFollow = val
 }
-func (p *UserInfo) SetAvatar(val *string) {
+func (p *UserInfo) SetAvatar(val string) {
 	p.Avatar = val
 }
-func (p *UserInfo) SetBackgroundImage(val *string) {
+func (p *UserInfo) SetBackgroundImage(val string) {
 	p.BackgroundImage = val
 }
-func (p *UserInfo) SetSignature(val *string) {
+func (p *UserInfo) SetSignature(val string) {
 	p.Signature = val
 }
-func (p *UserInfo) SetTotalFavorited(val *string) {
+func (p *UserInfo) SetTotalFavorited(val int64) {
 	p.TotalFavorited = val
 }
-func (p *UserInfo) SetWorkCount(val *int64) {
+func (p *UserInfo) SetWorkCount(val int64) {
 	p.WorkCount = val
 }
-func (p *UserInfo) SetFaviriteCount(val *int64) {
+func (p *UserInfo) SetFaviriteCount(val int64) {
 	p.FaviriteCount = val
 }
 
@@ -977,42 +942,21 @@ var fieldIDToName_UserInfo = map[int16]string{
 	11: "favirite_count",
 }
 
-func (p *UserInfo) IsSetFollowCount() bool {
-	return p.FollowCount != nil
-}
-
-func (p *UserInfo) IsSetAvatar() bool {
-	return p.Avatar != nil
-}
-
-func (p *UserInfo) IsSetBackgroundImage() bool {
-	return p.BackgroundImage != nil
-}
-
-func (p *UserInfo) IsSetSignature() bool {
-	return p.Signature != nil
-}
-
-func (p *UserInfo) IsSetTotalFavorited() bool {
-	return p.TotalFavorited != nil
-}
-
-func (p *UserInfo) IsSetWorkCount() bool {
-	return p.WorkCount != nil
-}
-
-func (p *UserInfo) IsSetFaviriteCount() bool {
-	return p.FaviriteCount != nil
-}
-
 func (p *UserInfo) Read(iprot thrift.TProtocol) (err error) {
 
 	var fieldTypeId thrift.TType
 	var fieldId int16
 	var issetId bool = false
 	var issetName bool = false
+	var issetFollowCount bool = false
 	var issetFollowerCount bool = false
 	var issetIsFollow bool = false
+	var issetAvatar bool = false
+	var issetBackgroundImage bool = false
+	var issetSignature bool = false
+	var issetTotalFavorited bool = false
+	var issetWorkCount bool = false
+	var issetFaviriteCount bool = false
 
 	if _, err = iprot.ReadStructBegin(); err != nil {
 		goto ReadStructBeginError
@@ -1055,6 +999,7 @@ func (p *UserInfo) Read(iprot thrift.TProtocol) (err error) {
 				if err = p.ReadField3(iprot); err != nil {
 					goto ReadFieldError
 				}
+				issetFollowCount = true
 			} else {
 				if err = iprot.Skip(fieldTypeId); err != nil {
 					goto SkipFieldError
@@ -1087,6 +1032,7 @@ func (p *UserInfo) Read(iprot thrift.TProtocol) (err error) {
 				if err = p.ReadField6(iprot); err != nil {
 					goto ReadFieldError
 				}
+				issetAvatar = true
 			} else {
 				if err = iprot.Skip(fieldTypeId); err != nil {
 					goto SkipFieldError
@@ -1097,6 +1043,7 @@ func (p *UserInfo) Read(iprot thrift.TProtocol) (err error) {
 				if err = p.ReadField7(iprot); err != nil {
 					goto ReadFieldError
 				}
+				issetBackgroundImage = true
 			} else {
 				if err = iprot.Skip(fieldTypeId); err != nil {
 					goto SkipFieldError
@@ -1107,16 +1054,18 @@ func (p *UserInfo) Read(iprot thrift.TProtocol) (err error) {
 				if err = p.ReadField8(iprot); err != nil {
 					goto ReadFieldError
 				}
+				issetSignature = true
 			} else {
 				if err = iprot.Skip(fieldTypeId); err != nil {
 					goto SkipFieldError
 				}
 			}
 		case 9:
-			if fieldTypeId == thrift.STRING {
+			if fieldTypeId == thrift.I64 {
 				if err = p.ReadField9(iprot); err != nil {
 					goto ReadFieldError
 				}
+				issetTotalFavorited = true
 			} else {
 				if err = iprot.Skip(fieldTypeId); err != nil {
 					goto SkipFieldError
@@ -1127,6 +1076,7 @@ func (p *UserInfo) Read(iprot thrift.TProtocol) (err error) {
 				if err = p.ReadField10(iprot); err != nil {
 					goto ReadFieldError
 				}
+				issetWorkCount = true
 			} else {
 				if err = iprot.Skip(fieldTypeId); err != nil {
 					goto SkipFieldError
@@ -1137,6 +1087,7 @@ func (p *UserInfo) Read(iprot thrift.TProtocol) (err error) {
 				if err = p.ReadField11(iprot); err != nil {
 					goto ReadFieldError
 				}
+				issetFaviriteCount = true
 			} else {
 				if err = iprot.Skip(fieldTypeId); err != nil {
 					goto SkipFieldError
@@ -1166,6 +1117,11 @@ func (p *UserInfo) Read(iprot thrift.TProtocol) (err error) {
 		goto RequiredFieldNotSetError
 	}
 
+	if !issetFollowCount {
+		fieldId = 3
+		goto RequiredFieldNotSetError
+	}
+
 	if !issetFollowerCount {
 		fieldId = 4
 		goto RequiredFieldNotSetError
@@ -1173,6 +1129,36 @@ func (p *UserInfo) Read(iprot thrift.TProtocol) (err error) {
 
 	if !issetIsFollow {
 		fieldId = 5
+		goto RequiredFieldNotSetError
+	}
+
+	if !issetAvatar {
+		fieldId = 6
+		goto RequiredFieldNotSetError
+	}
+
+	if !issetBackgroundImage {
+		fieldId = 7
+		goto RequiredFieldNotSetError
+	}
+
+	if !issetSignature {
+		fieldId = 8
+		goto RequiredFieldNotSetError
+	}
+
+	if !issetTotalFavorited {
+		fieldId = 9
+		goto RequiredFieldNotSetError
+	}
+
+	if !issetWorkCount {
+		fieldId = 10
+		goto RequiredFieldNotSetError
+	}
+
+	if !issetFaviriteCount {
+		fieldId = 11
 		goto RequiredFieldNotSetError
 	}
 	return nil
@@ -1215,7 +1201,7 @@ func (p *UserInfo) ReadField3(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadI64(); err != nil {
 		return err
 	} else {
-		p.FollowCount = &v
+		p.FollowCount = v
 	}
 	return nil
 }
@@ -1242,7 +1228,7 @@ func (p *UserInfo) ReadField6(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return err
 	} else {
-		p.Avatar = &v
+		p.Avatar = v
 	}
 	return nil
 }
@@ -1251,7 +1237,7 @@ func (p *UserInfo) ReadField7(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return err
 	} else {
-		p.BackgroundImage = &v
+		p.BackgroundImage = v
 	}
 	return nil
 }
@@ -1260,16 +1246,16 @@ func (p *UserInfo) ReadField8(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return err
 	} else {
-		p.Signature = &v
+		p.Signature = v
 	}
 	return nil
 }
 
 func (p *UserInfo) ReadField9(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadString(); err != nil {
+	if v, err := iprot.ReadI64(); err != nil {
 		return err
 	} else {
-		p.TotalFavorited = &v
+		p.TotalFavorited = v
 	}
 	return nil
 }
@@ -1278,7 +1264,7 @@ func (p *UserInfo) ReadField10(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadI64(); err != nil {
 		return err
 	} else {
-		p.WorkCount = &v
+		p.WorkCount = v
 	}
 	return nil
 }
@@ -1287,7 +1273,7 @@ func (p *UserInfo) ReadField11(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadI64(); err != nil {
 		return err
 	} else {
-		p.FaviriteCount = &v
+		p.FaviriteCount = v
 	}
 	return nil
 }
@@ -1396,16 +1382,14 @@ WriteFieldEndError:
 }
 
 func (p *UserInfo) writeField3(oprot thrift.TProtocol) (err error) {
-	if p.IsSetFollowCount() {
-		if err = oprot.WriteFieldBegin("follow_count", thrift.I64, 3); err != nil {
-			goto WriteFieldBeginError
-		}
-		if err := oprot.WriteI64(*p.FollowCount); err != nil {
-			return err
-		}
-		if err = oprot.WriteFieldEnd(); err != nil {
-			goto WriteFieldEndError
-		}
+	if err = oprot.WriteFieldBegin("follow_count", thrift.I64, 3); err != nil {
+		goto WriteFieldBeginError
+	}
+	if err := oprot.WriteI64(p.FollowCount); err != nil {
+		return err
+	}
+	if err = oprot.WriteFieldEnd(); err != nil {
+		goto WriteFieldEndError
 	}
 	return nil
 WriteFieldBeginError:
@@ -1449,16 +1433,14 @@ WriteFieldEndError:
 }
 
 func (p *UserInfo) writeField6(oprot thrift.TProtocol) (err error) {
-	if p.IsSetAvatar() {
-		if err = oprot.WriteFieldBegin("avatar", thrift.STRING, 6); err != nil {
-			goto WriteFieldBeginError
-		}
-		if err := oprot.WriteString(*p.Avatar); err != nil {
-			return err
-		}
-		if err = oprot.WriteFieldEnd(); err != nil {
-			goto WriteFieldEndError
-		}
+	if err = oprot.WriteFieldBegin("avatar", thrift.STRING, 6); err != nil {
+		goto WriteFieldBeginError
+	}
+	if err := oprot.WriteString(p.Avatar); err != nil {
+		return err
+	}
+	if err = oprot.WriteFieldEnd(); err != nil {
+		goto WriteFieldEndError
 	}
 	return nil
 WriteFieldBeginError:
@@ -1468,16 +1450,14 @@ WriteFieldEndError:
 }
 
 func (p *UserInfo) writeField7(oprot thrift.TProtocol) (err error) {
-	if p.IsSetBackgroundImage() {
-		if err = oprot.WriteFieldBegin("background_image", thrift.STRING, 7); err != nil {
-			goto WriteFieldBeginError
-		}
-		if err := oprot.WriteString(*p.BackgroundImage); err != nil {
-			return err
-		}
-		if err = oprot.WriteFieldEnd(); err != nil {
-			goto WriteFieldEndError
-		}
+	if err = oprot.WriteFieldBegin("background_image", thrift.STRING, 7); err != nil {
+		goto WriteFieldBeginError
+	}
+	if err := oprot.WriteString(p.BackgroundImage); err != nil {
+		return err
+	}
+	if err = oprot.WriteFieldEnd(); err != nil {
+		goto WriteFieldEndError
 	}
 	return nil
 WriteFieldBeginError:
@@ -1487,16 +1467,14 @@ WriteFieldEndError:
 }
 
 func (p *UserInfo) writeField8(oprot thrift.TProtocol) (err error) {
-	if p.IsSetSignature() {
-		if err = oprot.WriteFieldBegin("signature", thrift.STRING, 8); err != nil {
-			goto WriteFieldBeginError
-		}
-		if err := oprot.WriteString(*p.Signature); err != nil {
-			return err
-		}
-		if err = oprot.WriteFieldEnd(); err != nil {
-			goto WriteFieldEndError
-		}
+	if err = oprot.WriteFieldBegin("signature", thrift.STRING, 8); err != nil {
+		goto WriteFieldBeginError
+	}
+	if err := oprot.WriteString(p.Signature); err != nil {
+		return err
+	}
+	if err = oprot.WriteFieldEnd(); err != nil {
+		goto WriteFieldEndError
 	}
 	return nil
 WriteFieldBeginError:
@@ -1506,16 +1484,14 @@ WriteFieldEndError:
 }
 
 func (p *UserInfo) writeField9(oprot thrift.TProtocol) (err error) {
-	if p.IsSetTotalFavorited() {
-		if err = oprot.WriteFieldBegin("total_favorited", thrift.STRING, 9); err != nil {
-			goto WriteFieldBeginError
-		}
-		if err := oprot.WriteString(*p.TotalFavorited); err != nil {
-			return err
-		}
-		if err = oprot.WriteFieldEnd(); err != nil {
-			goto WriteFieldEndError
-		}
+	if err = oprot.WriteFieldBegin("total_favorited", thrift.I64, 9); err != nil {
+		goto WriteFieldBeginError
+	}
+	if err := oprot.WriteI64(p.TotalFavorited); err != nil {
+		return err
+	}
+	if err = oprot.WriteFieldEnd(); err != nil {
+		goto WriteFieldEndError
 	}
 	return nil
 WriteFieldBeginError:
@@ -1525,16 +1501,14 @@ WriteFieldEndError:
 }
 
 func (p *UserInfo) writeField10(oprot thrift.TProtocol) (err error) {
-	if p.IsSetWorkCount() {
-		if err = oprot.WriteFieldBegin("work_count", thrift.I64, 10); err != nil {
-			goto WriteFieldBeginError
-		}
-		if err := oprot.WriteI64(*p.WorkCount); err != nil {
-			return err
-		}
-		if err = oprot.WriteFieldEnd(); err != nil {
-			goto WriteFieldEndError
-		}
+	if err = oprot.WriteFieldBegin("work_count", thrift.I64, 10); err != nil {
+		goto WriteFieldBeginError
+	}
+	if err := oprot.WriteI64(p.WorkCount); err != nil {
+		return err
+	}
+	if err = oprot.WriteFieldEnd(); err != nil {
+		goto WriteFieldEndError
 	}
 	return nil
 WriteFieldBeginError:
@@ -1544,16 +1518,14 @@ WriteFieldEndError:
 }
 
 func (p *UserInfo) writeField11(oprot thrift.TProtocol) (err error) {
-	if p.IsSetFaviriteCount() {
-		if err = oprot.WriteFieldBegin("favirite_count", thrift.I64, 11); err != nil {
-			goto WriteFieldBeginError
-		}
-		if err := oprot.WriteI64(*p.FaviriteCount); err != nil {
-			return err
-		}
-		if err = oprot.WriteFieldEnd(); err != nil {
-			goto WriteFieldEndError
-		}
+	if err = oprot.WriteFieldBegin("favirite_count", thrift.I64, 11); err != nil {
+		goto WriteFieldBeginError
+	}
+	if err := oprot.WriteI64(p.FaviriteCount); err != nil {
+		return err
+	}
+	if err = oprot.WriteFieldEnd(); err != nil {
+		goto WriteFieldEndError
 	}
 	return nil
 WriteFieldBeginError:
@@ -1625,14 +1597,9 @@ func (p *UserInfo) Field2DeepEqual(src string) bool {
 	}
 	return true
 }
-func (p *UserInfo) Field3DeepEqual(src *int64) bool {
+func (p *UserInfo) Field3DeepEqual(src int64) bool {
 
-	if p.FollowCount == src {
-		return true
-	} else if p.FollowCount == nil || src == nil {
-		return false
-	}
-	if *p.FollowCount != *src {
+	if p.FollowCount != src {
 		return false
 	}
 	return true
@@ -1651,74 +1618,44 @@ func (p *UserInfo) Field5DeepEqual(src bool) bool {
 	}
 	return true
 }
-func (p *UserInfo) Field6DeepEqual(src *string) bool {
+func (p *UserInfo) Field6DeepEqual(src string) bool {
 
-	if p.Avatar == src {
-		return true
-	} else if p.Avatar == nil || src == nil {
-		return false
-	}
-	if strings.Compare(*p.Avatar, *src) != 0 {
+	if strings.Compare(p.Avatar, src) != 0 {
 		return false
 	}
 	return true
 }
-func (p *UserInfo) Field7DeepEqual(src *string) bool {
+func (p *UserInfo) Field7DeepEqual(src string) bool {
 
-	if p.BackgroundImage == src {
-		return true
-	} else if p.BackgroundImage == nil || src == nil {
-		return false
-	}
-	if strings.Compare(*p.BackgroundImage, *src) != 0 {
+	if strings.Compare(p.BackgroundImage, src) != 0 {
 		return false
 	}
 	return true
 }
-func (p *UserInfo) Field8DeepEqual(src *string) bool {
+func (p *UserInfo) Field8DeepEqual(src string) bool {
 
-	if p.Signature == src {
-		return true
-	} else if p.Signature == nil || src == nil {
-		return false
-	}
-	if strings.Compare(*p.Signature, *src) != 0 {
+	if strings.Compare(p.Signature, src) != 0 {
 		return false
 	}
 	return true
 }
-func (p *UserInfo) Field9DeepEqual(src *string) bool {
+func (p *UserInfo) Field9DeepEqual(src int64) bool {
 
-	if p.TotalFavorited == src {
-		return true
-	} else if p.TotalFavorited == nil || src == nil {
-		return false
-	}
-	if strings.Compare(*p.TotalFavorited, *src) != 0 {
+	if p.TotalFavorited != src {
 		return false
 	}
 	return true
 }
-func (p *UserInfo) Field10DeepEqual(src *int64) bool {
+func (p *UserInfo) Field10DeepEqual(src int64) bool {
 
-	if p.WorkCount == src {
-		return true
-	} else if p.WorkCount == nil || src == nil {
-		return false
-	}
-	if *p.WorkCount != *src {
+	if p.WorkCount != src {
 		return false
 	}
 	return true
 }
-func (p *UserInfo) Field11DeepEqual(src *int64) bool {
+func (p *UserInfo) Field11DeepEqual(src int64) bool {
 
-	if p.FaviriteCount == src {
-		return true
-	} else if p.FaviriteCount == nil || src == nil {
-		return false
-	}
-	if *p.FaviriteCount != *src {
+	if p.FaviriteCount != src {
 		return false
 	}
 	return true

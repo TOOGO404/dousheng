@@ -6,11 +6,14 @@ import (
 	api "api-gateway/biz/model/api"
 	"api-gateway/rpc"
 	"context"
+	"favorite-service/kitex_gen/favorite"
 	"feed-service/kitex_gen/feed"
-	"github.com/cloudwego/hertz/pkg/app"
-	"github.com/cloudwego/hertz/pkg/protocol/consts"
 	"log"
 	"time"
+	"user-service/kitex_gen/user"
+
+	"github.com/cloudwego/hertz/pkg/app"
+	"github.com/cloudwego/hertz/pkg/protocol/consts"
 )
 
 // Feed .
@@ -19,6 +22,7 @@ func Feed(ctx context.Context, c *app.RequestContext) {
 	var err error
 	var req api.FeedRequest
 	err = c.BindAndValidate(&req)
+	uid := c.GetInt64("uid")
 	if err != nil {
 		c.String(consts.StatusBadRequest, err.Error())
 		c.Abort()
@@ -32,28 +36,47 @@ func Feed(ctx context.Context, c *app.RequestContext) {
 	rpcResp, _ := rpc.FeedRPCClient.GetFeed(ctx, &feed.FeedReq{
 		LatestTime: *req.LatestTime,
 	})
-	log.Printf("\nlen unix:%d\nlen post:%d", time.Now().Unix(), req.LatestTime)
-
 	resp := new(api.FeedResponse)
 	resp.StatusCode = 0
 	resp.StatusMsg = nil
-	log.Println(len(resp.VideoList))
 	videos := make([]*api.Video, len(rpcResp.VideoList))
 	for index, video := range rpcResp.VideoList {
+		userInfo, _ := rpc.UserRPCClient.GetUserInfo(ctx, &user.UserInfoReq{
+			SendReqUserId: uid,
+			ReqUserId:     uid,
+		})
 		av := new(api.Video)
-
 		av.ID = video.Id
 		av.Title = video.Title
 		av.Author = &api.User{
-			ID: video.AuthorID,
+			ID:              video.AuthorID,
+			Name:            userInfo.UserInfo.Name,
+			BackgroundImage: &userInfo.UserInfo.BackgroundImage,
+			Avatar:          &userInfo.UserInfo.Avatar,
+			IsFollow:        userInfo.UserInfo.IsFollow,
+			FaviriteCount:   &userInfo.UserInfo.FaviriteCount,
+			TotalFavorited:  &userInfo.UserInfo.TotalFavorited,
+			FollowCount:     &userInfo.UserInfo.FollowCount,
+			FollowerCount:   userInfo.UserInfo.FollowerCount,
+			Signature:       &userInfo.UserInfo.Signature,
 		}
 		av.PlayURL = video.PlayUrl
 		av.CoverURL = video.CoverUrl
-		av.IsFavorite = true
-		av.CommentCount = 0
-		av.FavoriteCount = 0
+		av.IsFavorite, _ = rpc.FavoriteClient.
+			IsFavorited(ctx, &favorite.CheckFavoritedReq{
+				Uid: uid,
+				Vid: video.Id,
+			})
+		av.FavoriteCount, _ = rpc.FavoriteClient.
+			GetFavorCount(ctx, video.Id)
+		log.Println(av.FavoriteCount)
+		av.CommentCount, _ = rpc.CommentRPCClient.
+			GetCommentCnt(ctx, video.Id)
+
 		videos[index] = av
 	}
 	resp.VideoList = videos
+
+	resp.NextTime = &rpcResp.NextTime
 	c.JSON(consts.StatusOK, resp)
 }

@@ -4,8 +4,11 @@ package api
 
 import (
 	"context"
+	"favorite-service/kitex_gen/favorite"
 
 	api "api-gateway/biz/model/api"
+	"api-gateway/rpc"
+
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
 )
@@ -16,13 +19,18 @@ func FavoriteAction(ctx context.Context, c *app.RequestContext) {
 	var err error
 	var req api.FavoriteActionRequest
 	err = c.BindAndValidate(&req)
-	if err != nil {
+	uid := c.GetInt64("uid")
+	if err != nil || uid == 0 {
 		c.String(consts.StatusBadRequest, err.Error())
 		return
 	}
-
+	rpc.FavoriteClient.FavoriteAction(ctx, &favorite.FavoriteActionReq{
+		VideoId:    req.VideoID,
+		Uid:        uid,
+		ActionType: req.ActionType,
+	})
 	resp := new(api.FavoriteActionResponse)
-
+	resp.StatusCode = 0
 	c.JSON(consts.StatusOK, resp)
 }
 
@@ -32,12 +40,32 @@ func GetFavoriteList(ctx context.Context, c *app.RequestContext) {
 	var err error
 	var req api.FavoriteListRequest
 	err = c.BindAndValidate(&req)
-	if err != nil {
+	uid := c.GetInt64("uid")
+	if err != nil || uid == 0 {
 		c.String(consts.StatusBadRequest, err.Error())
 		return
 	}
-
+	rpcResp, err := rpc.FavoriteClient.GetFavoriteList(ctx, &favorite.FavoriteListReq{
+		Uid:    uid,
+		UserId: req.UserID,
+	})
+	if err != nil {
+		c.JSON(consts.StatusInternalServerError, err.Error())
+	}
 	resp := new(api.FavoriteListResponse)
-
+	resp.VideoList = make([]*api.Video, len(rpcResp.VideoList))
+	for idx, video := range rpcResp.VideoList {
+		resp.VideoList[idx] = &api.Video{
+			ID: video.Id,
+			Author: &api.User{
+				ID:   video.Author.Id,
+				Name: video.Author.Name,
+			},
+			PlayURL:    video.PlayUrl,
+			CoverURL:   video.CoverUrl,
+			Title:      video.Title,
+			IsFavorite: true,
+		}
+	}
 	c.JSON(consts.StatusOK, resp)
 }

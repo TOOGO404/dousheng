@@ -17,16 +17,18 @@ func (s *FeedRpcServiceImpl) GetFeed(ctx context.Context, req *feed.FeedReq) (*f
 	videos := make([]*feed.Video, len(videoList))
 	for index, video := range videoList {
 		fv := new(feed.Video)
-
 		fv.Id = video.Id
 		fv.AuthorID = video.Author
 		fv.Title = video.Title
 		fv.PlayUrl = video.PlayUrl
 		fv.CoverUrl = video.CoverUrl
-
 		videos[index] = fv
 	}
-	log.Println(len(videos))
+	log.Println("this time get video num:", len(videos))
 	resp.VideoList = videos
+	if l := len(videos); l != 0 {
+		resp.NextTime = videoList[l-1].CreatedAt
+	}
+
 	return resp, nil
 }

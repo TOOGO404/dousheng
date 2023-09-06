@@ -11,6 +11,8 @@ struct Video {
 struct VideoData {
     1: required binary data
     2: required string title
+    3: required i64 uid
+    4: required string file_type
 }
 struct PublishActionResp {
     1: required i64 video_id
